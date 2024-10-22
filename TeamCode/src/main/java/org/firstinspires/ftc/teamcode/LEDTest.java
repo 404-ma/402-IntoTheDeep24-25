@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.GamePad;
+import org.firstinspires.ftc.teamcode.Helper.TankDriveTrain;
 
-@TeleOp(name="LEDTestJosh", group="Test")
+@TeleOp(name="LEDTest&DriveTank", group="Test")
 public class LEDTest extends LinearOpMode {
 
     public static class Params {
@@ -29,6 +30,7 @@ public class LEDTest extends LinearOpMode {
         telemetry.update();
 
         GamePad GamePad1 = new GamePad(gamepad1);
+        TankDriveTrain tankerdrive = new TankDriveTrain(hardwareMap);
         Servo srv;
 
         srv = hardwareMap.servo.get(PARAMS.servoName);
@@ -50,6 +52,10 @@ public class LEDTest extends LinearOpMode {
                     double pos = 0;
                     pos = (gamepad1.left_stick_x * 0.5) + 0.51;
                     srv.setPosition(pos);
+                    tankerdrive.setDriveFromJoystick(
+                            gamepad1.left_stick_y,
+                            gamepad1.right_stick_x
+                    );
                     telemetry.addData("Current Servo Position", pos);
                     telemetry.addLine();
                     telemetry.update();
