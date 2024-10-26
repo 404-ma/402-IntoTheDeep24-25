@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.Helper.TankDriveTrain;
 
 import java.util.Locale;
 
-@TeleOp(name="LEDTest&DriveTank", group="Test")
-public class LEDTest extends LinearOpMode {
+@TeleOp(name="IndicatorLightTest", group="Test")
+public class IndicatorLightTest extends LinearOpMode {
 
     public static class Params {
         public double servoStartPos = 0.532;
@@ -50,13 +50,19 @@ public class LEDTest extends LinearOpMode {
             GamePad.GameplayInputType inpType = gamePad1.WaitForGamepadInput(30);
             switch (inpType) {
                 case JOYSTICK:
-                    double pos = 0;
-                    pos = (gamepad1.left_stick_x * 0.5) + 0.501;
-                    srv.setPosition(pos);
                     tankerdrive.setDriveFromJoystick(
                             gamepad1.left_stick_y,
                             gamepad1.right_stick_x
                     );
+                    double pos = 0;
+                    if (gamepad1.left_stick_y < 0) {
+                        pos = 0.500; //Green when moving forwards
+                    } else if (gamepad1.left_stick_y > 0) {
+                        pos = 0.280; //Red when moving backwards
+                    } else {
+                        pos = 1.000; //White when not moving
+                    }
+                    srv.setPosition(pos);
                     update_telemetry(pos);
                     break;
                 default:
@@ -67,7 +73,8 @@ public class LEDTest extends LinearOpMode {
     }
     private void update_telemetry(double lightValue) {
         telemetry.addLine().addData("Current Servo (Light) Value", lightValue);
-        telemetry.addLine().addData("Current Joystick Input", gamepad1.left_stick_x);
+        telemetry.addLine().addData("Current Joystick Input", gamepad1.left_stick_y);
         telemetry.update();
     }
 }
+
