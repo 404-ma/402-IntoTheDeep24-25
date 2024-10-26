@@ -62,6 +62,12 @@ public class IndicatorLightTest extends LinearOpMode {
                     } else {
                         pos = 1.000; //White when not moving
                     }
+
+                    if (gamepad1.right_stick_x< 0) {
+                        pos = 0.388; //yellow when turning left
+                    } else if (gamepad1.right_stick_x > 0) {
+                        pos = 0.555; //blue when turning right
+                    }
                     srv.setPosition(pos);
                     update_telemetry(pos);
                     break;
