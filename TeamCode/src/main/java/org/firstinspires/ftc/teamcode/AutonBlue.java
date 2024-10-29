@@ -17,10 +17,9 @@ public class AutonBlue extends LinearOpMode {
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, startingPosition);
         waitForStart();
         // just move the robot 50 units forward and spin it around
-        Actions.runBlocking(new SequentialAction(
-                mecanumDrive.actionBuilder(startingPosition).lineToX(50).build(),
-                mecanumDrive.actionBuilder(new Pose2d(50, 0, 0))
+        Actions.runBlocking(
+                mecanumDrive.actionBuilder(mecanumDrive.pose).lineToX(50)
                         .turnTo(Math.toRadians(180)).build()
-        ));
+        );
     }
 }
