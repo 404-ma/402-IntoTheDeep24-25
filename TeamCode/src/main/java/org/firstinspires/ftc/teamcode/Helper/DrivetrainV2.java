@@ -27,7 +27,7 @@ public class DrivetrainV2 {
     private final DcMotor drvMotorBackLeft;
     private final DcMotor drvMotorFrontRight;
     private final DcMotor drvMotorBackRight;
-    private volatile boolean brakingOn = false;
+    protected volatile boolean brakingOn = false;
 
 
     public DrivetrainV2 (@NonNull HardwareMap hdwMap) {
