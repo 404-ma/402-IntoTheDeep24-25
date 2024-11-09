@@ -50,6 +50,7 @@ public class SpeedTestV2 extends LinearOpMode {
             telemetry.addData("Applied Smoothing", (isSmoothening ? "Smooth" : "Raw"));
             telemetry.addLine("Current MAX POWER: "+driveTrain.getMaxPower());
             telemetry.addLine("Current ACCELERATION RATE: "+driveTrain.getAccelerationRate());
+            telemetry.addLine("Current POWER: "+driveTrain.getCurrentPower());
 
             telemetry.update();
         }

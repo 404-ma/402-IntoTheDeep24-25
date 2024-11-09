@@ -29,6 +29,8 @@ public class NewDriveTrain extends DrivetrainV2 {
         return this.accelerationRate;
     }
 
+    public double getCurrentPower() { return this.currentPower; }
+
     public NewDriveTrain(@NonNull HardwareMap hdwMap) {
         super(hdwMap);
 
@@ -94,7 +96,7 @@ public class NewDriveTrain extends DrivetrainV2 {
         // Increase power, doesn't exceed max value
         if (joystickStartTime > 0) {
             long elapsedTime = System.currentTimeMillis() - joystickStartTime;
-            currentPower = Math.min(maxPower, (elapsedTime/30.0) * accelerationRate);
+            currentPower = Math.min(maxPower, (elapsedTime/60.0) * accelerationRate);
         }
 
 
