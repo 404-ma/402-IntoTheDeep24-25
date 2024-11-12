@@ -4,8 +4,6 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
@@ -21,9 +19,8 @@ public class MotorTest extends LinearOpMode {
 
     private static final String version = "1.0";
     private boolean setReversed = false;
-    // private ClawMoves yclaw;
+   // private ClawMoves yclaw;
     private boolean frontLeft, backLeft, frontRight, backRight = false;
-
     @Override
     public void runOpMode() {
         // Load Introduction and Wait for Start
@@ -33,30 +30,22 @@ public class MotorTest extends LinearOpMode {
         telemetry.addLine();
         telemetry.addData(">", "Press Start to Launch");
         telemetry.addLine();
-        telemetry.addData(">", "B = Right, X = Left, Y = Viper");
+        telemetry.addData(">", "A = Back Right, B = Front Right, X = Back Left, Y = Front Left");
         telemetry.update();
 
         GamePad gpIn1 = new GamePad(gamepad1);
         GamePad gpIn2 = new GamePad(gamepad2);
-
-        DcMotor leftMotor = hardwareMap.dcMotor.get("tankLeft");
-        DcMotor rightMotor = hardwareMap.dcMotor.get("tankRight");
-        DcMotor viperMotor = hardwareMap.dcMotor.get("Viper");
-
-        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        viperMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        viperMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        DrivetrainV2 drvTrain = new DrivetrainV2(hardwareMap);
+       // TestServo serv1 = hardwareMap.servo.get(PARAMS.);
 
         waitForStart();
         if (isStopRequested()) return;
 
-        boolean left = false, right = false, viper = false;
 
         telemetry.clear();
+
+        double speedMultiplier = 1;
+        double lastSpeed = 1;
 
         while (opModeIsActive()) {
             update_telemetry(gpIn1, gpIn2);
@@ -64,22 +53,28 @@ public class MotorTest extends LinearOpMode {
 
             GamePad.GameplayInputType inpType1 = gpIn1.WaitForGamepadInput(30);
             switch (inpType1) {
+                case BUTTON_A:
+                    backRight = !backRight;
+                    break;
+
                 case BUTTON_X:
-                    left = !left;
-                    leftMotor.setPower(left ? 1 : 0);
+                    backLeft = !backLeft;
                     break;
+
                 case BUTTON_B:
-                    right = !right;
-                    rightMotor.setPower(right ? 1 : 0);
+                    frontRight = !frontRight;
                     break;
+
                 case BUTTON_Y:
-                    viper = !viper;
-                    viperMotor.setPower(viper ? 1 : 0);
+                   frontLeft = !frontLeft;
                     break;
+
             }
-        }
+            drvTrain.setMotorsManually(frontLeft, frontRight, backLeft, backRight);
+            }
 
     }
+
 
     private void update_telemetry(GamePad gpi1, GamePad gpi2) {
         telemetry.addLine("Gamepad #1");
@@ -88,6 +83,7 @@ public class MotorTest extends LinearOpMode {
         telemetry.addLine().addData("GP1 Cnt", gpi1.getTelemetry_InputCount());
         telemetry.addLine().addData("GP1 Input", gpi1.getTelemetry_InputLastType().toString());
         telemetry.addLine().addData("Front Left", frontLeft).addData("Front Right", frontRight).addData("Back Left", backLeft).addData("Back Right", backRight);
+
         telemetry.update();
     }
 }
