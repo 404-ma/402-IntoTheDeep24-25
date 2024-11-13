@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
 import java.util.Vector;
 
-@Autonomous(name = "**RED** Autonomous")
-public class AutonRed extends LinearOpMode {
+@Autonomous(name = "**BLUE** Autonomous")
+public class AutonBlue extends LinearOpMode {
     // The initial position of the robot, relative to some origin
     private final Pose2d startingPosition = new Pose2d(0, 0, 0);
     @Override
@@ -35,7 +35,7 @@ public class AutonRed extends LinearOpMode {
 
         action = mecanumDrive.actionBuilder(mecanumDrive.pose)
                 //.setReversed(true).lineToY(-28)
-                .setReversed(true).splineTo(new Vector2d(-25,-26), Math.toRadians(-180))
+                .setReversed(true).splineTo(new Vector2d(-25,26), Math.toRadians(-180))
                 .build();
         while (action.run(new TelemetryPacket()))
             updateTelemetry(mecanumDrive.pose.position);
@@ -49,7 +49,7 @@ public class AutonRed extends LinearOpMode {
 
         action = mecanumDrive.actionBuilder(mecanumDrive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-25,-24), Math.toRadians(-180))
+                .splineTo(new Vector2d(-25,24), Math.toRadians(-180))
                 .build();
         while (action.run(new TelemetryPacket()))
             updateTelemetry(mecanumDrive.pose.position);
@@ -63,7 +63,7 @@ public class AutonRed extends LinearOpMode {
 
         action = mecanumDrive.actionBuilder(mecanumDrive.pose)
                 .setReversed(true)
-                .splineTo(new Vector2d(-25,-22), Math.toRadians(-180))
+                .splineTo(new Vector2d(-25,22), Math.toRadians(-180))
                 .build();
         while (action.run(new TelemetryPacket()))
             updateTelemetry(mecanumDrive.pose.position);

@@ -30,16 +30,14 @@ public class EventBus {
         subscribers.remove(subId);
     }
 
-    public void emit(Set<String> events, Object ... params) {
+    public void emit(String event, Object... params) {
         for (Map.Entry<String, Class<? extends Subscriber<?, ?>>> entry : this.subscribers.entrySet()) {
             String subId = entry.getKey();
             Class<? extends Subscriber<?, ?>> subscriberClass = entry.getValue();
 
-            if (events.contains(subId)) {
+            if (subId.equals(event)) {
                 try {
-//                    Subscriber<?> subscriber = subscriberClass.getDeclaredConstructor().newInstance();
-                    Subscriber<?,?> subscriber = subscriberClass.newInstance();
-
+                    Subscriber<?, ?> subscriber = subscriberClass.newInstance();
                     subscriber.onMessage(params);
                 } catch (Exception e) {
                     e.printStackTrace();
