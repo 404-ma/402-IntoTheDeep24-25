@@ -203,7 +203,7 @@ public final class MecanumDrive {
         /* Configured with instructions from
          *  https://rr.brott.dev/docs/v1-0/tuning/
          */
-        public double inPerTick = 0.00197898324395183887931446923919;
+        public double inPerTick = 0.00293753354527063292184468023616;
         public double lateralInPerTick = 0.0016546343590627057;
 
         // EXPERIMENT: CHANGED FROM 255 TO 4255
