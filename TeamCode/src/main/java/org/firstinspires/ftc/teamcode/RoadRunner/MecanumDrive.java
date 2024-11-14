@@ -204,14 +204,14 @@ public final class MecanumDrive {
          *  https://rr.brott.dev/docs/v1-0/tuning/
          */
         public double inPerTick = 0.00293753354527063292184468023616;
-        public double lateralInPerTick = 0.0016546343590627057;
+        public double lateralInPerTick = 0.002378545673566869;
 
         // EXPERIMENT: CHANGED FROM 255 TO 4255
         public double trackWidthTicks = 6657.607308597517;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.8596057353751845;
-        public double kV = 0.0003826028152255662;
+        public double kS = 0.8190196536316523;
+        public double kV = 0.000399863136864858;
 
         // EXPERIMENT : CHANGED kA from 0.000001 to current value
         public double kA = 0.000025;
