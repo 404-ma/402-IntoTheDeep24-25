@@ -14,6 +14,9 @@ import java.util.Objects;
 public class MeepMeepTesting {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
+        // Instantiate the appropriate auton depending on the run configuration
+        // If you have a CLI argument of "blue", it will run the blue auton
+        // And vice verse for red
         Auton auton;
         if(Objects.equals(args[0], "blue")){
             auton = new AutonBlue();
@@ -23,12 +26,15 @@ public class MeepMeepTesting {
         else{
             throw new RuntimeException("No Team Specified; Unable to start");
         }
+        // Set up MeepMeep
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                // Make sure the robot has the appropriate color and starting position
                 .setColorScheme(auton.getClass() == AutonBlue.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
                 .setStartPose(auton.getStartingPose())
                 .build();
+        // Simulate the robot
         MeepMeepRunner runner = new MeepMeepRunner(myBot);
         auton.Run(runner);
         runner.Finish();
