@@ -5,5 +5,5 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 
 @FunctionalInterface
 public interface ActionFunction {
-    Action evaluate(TrajectoryActionBuilder builder);
+    TrajectoryActionBuilder evaluate(TrajectoryActionBuilder builder);
 }

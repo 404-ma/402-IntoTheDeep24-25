@@ -29,9 +29,9 @@ public class MeepMeepTesting {
                 .setColorScheme(auton.getClass() == AutonBlue.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
                 .setStartPose(auton.getStartingPose())
                 .build();
-
-        auton.Run(new MeepMeepRunner(myBot));
-
+        MeepMeepRunner runner = new MeepMeepRunner(myBot);
+        auton.Run(runner);
+        runner.Finish();
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)
                 .setBackgroundAlpha(0.95f)

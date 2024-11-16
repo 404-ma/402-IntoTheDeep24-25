@@ -12,6 +12,6 @@ public class AutonRunner implements Runner {
         drive = mecanumDrive;
     }
     public void runAction(ActionFunction actionFunction) {
-        Actions.runBlocking(actionFunction.evaluate(drive.actionBuilder(drive.pose)));
+        Actions.runBlocking(actionFunction.evaluate(drive.actionBuilder(drive.pose)).build());
     }
 }
