@@ -1,0 +1,27 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.acmerobotics.roadrunner.Vector2d;
+import com.example.auton.AutonRed;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
+import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
+
+@Autonomous(name = "**RED** Autonomous")
+public class AutonRedOp extends LinearOpMode {
+    @Override
+    public void runOpMode() throws InterruptedException {
+        AutonRed auton = new AutonRed();
+        MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
+        AutonRunner runner = new AutonRunner(mecanumDrive);
+        waitForStart();
+        auton.Run(runner);
+    }
+
+    private void updateTelemetry(Vector2d pos) {
+        telemetry.addLine().addData("Current X Pos:", pos.x);
+        telemetry.addLine().addData("Current Y Pos:", pos.y);
+        telemetry.update();
+    }
+}
