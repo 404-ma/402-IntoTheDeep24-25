@@ -6,17 +6,17 @@ import com.acmerobotics.roadrunner.Vector2d;
 public class AutonRed implements Auton {
     public void Run(Runner runner) {
         runner.runAction(builder -> builder
-                .setReversed(true).lineToX(-26)
+                .setReversed(true).lineToX(26)
                 .turnTo(Math.toRadians(-180)));
         runner.runAction(builder -> builder
-                .splineTo(new Vector2d(-25, -26), Math.toRadians(-180)));
+                .splineTo(new Vector2d(25, -26), Math.toRadians(-180)));
         runner.runAction(builder -> builder
                 .lineToX(-3).turnTo(Math.toRadians(-180)));
         runner.runAction(builder -> builder
-                .splineTo(new Vector2d(-25, -24), Math.toRadians(-180)));
+                .splineTo(new Vector2d(25, -24), Math.toRadians(-180)));
         runner.runAction(builder -> builder
                 .lineToX(-3).turnTo(Math.toRadians(-180))
-                .splineTo(new Vector2d(-25, -22), Math.toRadians(-180))
+                .splineTo(new Vector2d(25, -22), Math.toRadians(-180))
                 );
     }
 
