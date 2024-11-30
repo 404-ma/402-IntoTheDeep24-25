@@ -20,9 +20,21 @@ import org.firstinspires.ftc.teamcode.RoadRunner.messages.ThreeDeadWheelInputsMe
 
 @Config
 public final class ThreeDeadWheelLocalizer implements Localizer {
+    public static class Params {
+        public double par0YTicks = 1533.6221801366373; // y position of the first parallel encoder (in tick units)
+        public double par1YTicks = -1736.5634745813984; // y position of the second parallel encoder (in tick units)
+        public double perpXTicks = -614.3417079950631; // x position of the perpendicular encoder (in tick units)
+        public boolean par0Reverse = true;
+        public boolean par1Reverse = false;
+        public boolean perpReverse = false;
+    }
+
     public static Params PARAMS = new Params();
+
     public final Encoder par0, par1, perp;
+
     public final double inPerTick;
+
     private int lastPar0Pos, lastPar1Pos, lastPerpPos;
     private boolean initialized;
 
@@ -34,9 +46,10 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         par1 = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "backRight")));
         perp = new OverflowEncoder(new RawEncoder(hardwareMap.get(DcMotorEx.class, "frontRight")));
 
-        // TODO: reverse encoder directions if needed
-        par1.setDirection(DcMotorSimple.Direction.REVERSE);
-        //perp.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Reverse encoder directions if needed
+        if (PARAMS.par0Reverse) par0.setDirection(DcMotorSimple.Direction.REVERSE);
+        if (PARAMS.par1Reverse) par1.setDirection(DcMotorSimple.Direction.REVERSE);
+        if (PARAMS.perpReverse) perp.setDirection(DcMotorSimple.Direction.REVERSE);
 
         lastPar0Pos = par0.getPositionAndVelocity().position;
         lastPar1Pos = par1.getPositionAndVelocity().position;
@@ -73,16 +86,16 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
 
         Twist2dDual<Time> twist = new Twist2dDual<>(
                 new Vector2dDual<>(
-                        new DualNum<Time>(new double[]{
+                        new DualNum<Time>(new double[] {
                                 (PARAMS.par0YTicks * par1PosDelta - PARAMS.par1YTicks * par0PosDelta) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
                                 (PARAMS.par0YTicks * par1PosVel.velocity - PARAMS.par1YTicks * par0PosVel.velocity) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
                         }).times(inPerTick),
-                        new DualNum<Time>(new double[]{
+                        new DualNum<Time>(new double[] {
                                 (PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks) * (par1PosDelta - par0PosDelta) + perpPosDelta),
                                 (PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks) * (par1PosVel.velocity - par0PosVel.velocity) + perpPosVel.velocity),
                         }).times(inPerTick)
                 ),
-                new DualNum<>(new double[]{
+                new DualNum<>(new double[] {
                         (par0PosDelta - par1PosDelta) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
                         (par0PosVel.velocity - par1PosVel.velocity) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
                 })
@@ -93,11 +106,5 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         lastPerpPos = perpPosVel.position;
 
         return twist;
-    }
-
-    public static class Params {
-        public double par0YTicks = -2274.9313131416716; // y position of the first parallel encoder (in tick units)
-        public double par1YTicks = 2411.4428601511972; // y position of the second parallel encoder (in tick units)
-        public double perpXTicks = -2208.267886684034; // x position of the perpendicular encoder (in tick units)
     }
 }
