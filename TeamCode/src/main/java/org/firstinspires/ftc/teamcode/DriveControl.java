@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
 import org.firstinspires.ftc.teamcode.Helper.GamePad;
+import org.firstinspires.ftc.teamcode.Helper.Grabber;
 
-import java.util.List;
 import java.util.Locale;
 
 @Config
@@ -19,7 +19,7 @@ public class DriveControl extends LinearOpMode {
 
     private static final String version = "1.0";
     private boolean setReversed = false;
-   // private ClawMoves yclaw;
+    // private ClawMoves yclaw;
 
     @Override
     public void runOpMode() {
@@ -34,7 +34,8 @@ public class DriveControl extends LinearOpMode {
         GamePad gpIn1 = new GamePad(gamepad1, false);
         GamePad gpIn2 = new GamePad(gamepad2);
         DrivetrainV2 drvTrain = new DrivetrainV2(hardwareMap);
-       // TestServo serv1 = hardwareMap.servo.get(PARAMS.);
+        Grabber grabber = new Grabber(hardwareMap);
+        // TestServo serv1 = hardwareMap.servo.get(PARAMS.);
 
 //        new HapticEventBusTester();
 //        HapticEventBusTester hapticEvent = HapticEventBusTester.getInstance();
@@ -116,17 +117,20 @@ public class DriveControl extends LinearOpMode {
                         lastSpeed = 1;
                     }
                     break;
-
-                case JOYSTICK:
-                    drvTrain.setDriveVectorFromJoystick(gamepad2.left_stick_x * (float) speedMultiplier,
-                            gamepad2.right_stick_x * (float) speedMultiplier,
-                            gamepad2.left_stick_y * (float) speedMultiplier, setReversed);
+                case BUTTON_B:
+                    if (grabber.isOpen())
+                        grabber.Close();
+                    else
+                        grabber.Open();
                     break;
-
+                case BUTTON_A:
+                    grabber.SetHeight(0);
+                    break;
                 case BUTTON_Y:
-                    //DeferredActions.CreateDeferredAction(150, DeferredActions.DeferredActionType.MOVEMENT);
-
-
+                    grabber.SetHeight(2000);
+                    break;
+                case JOYSTICK:
+                    grabber.ManualControl(gamepad2.right_stick_y);
             }
 
         }
