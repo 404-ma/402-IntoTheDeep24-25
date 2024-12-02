@@ -12,7 +12,7 @@ public class MeepMeepRunner implements Runner {
         bot = myBot;
         builder = bot.getDrive().actionBuilder(bot.getPose());
     }
-    public void runAction(ActionFunction actionFunction) {
+    public void move(ActionFunction actionFunction) {
         builder = actionFunction.evaluate(builder);
     }
     public void Finish(){

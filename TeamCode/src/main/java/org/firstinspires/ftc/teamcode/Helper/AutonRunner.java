@@ -16,7 +16,7 @@ public class AutonRunner implements Runner {
         drive = mecanumDrive;
         callback = telemetryCallback;
     }
-    public void runAction(ActionFunction actionFunction) {
+    public void move(ActionFunction actionFunction) {
         // Run the action the user asked for, and then run the callback at every tick
         Action action = actionFunction.evaluate(drive.actionBuilder(drive.pose)).build();
         while(action.run(new TelemetryPacket()))

@@ -5,5 +5,5 @@ public interface Runner {
     // The lambda expects an argument of an action builder - the runner is responsible
     // for providing that. It will return the action builder with some new actions
     // added. The runner is then responsible for running it.
-    void runAction(ActionFunction actionFunction);
+    void move(ActionFunction actionFunction);
 }
