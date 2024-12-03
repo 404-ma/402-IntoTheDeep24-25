@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Helper;
 
+import android.os.SystemClock;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -23,6 +25,9 @@ public class Grabber {
         motor = hwMap.dcMotor.get(motorName);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        SystemClock.sleep(20);
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void Open(){
         servo.setPosition(servoOpenPos);
