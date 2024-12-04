@@ -29,7 +29,8 @@ public class MeepMeepTesting {
         // Set up MeepMeep
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.525)
+                .setDimensions(14.5, 14.5)
                 // Make sure the robot has the appropriate color and starting position
                 .setColorScheme(auton.getClass() == AutonBlueHuman.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
                 .setStartPose(auton.getStartingPose())

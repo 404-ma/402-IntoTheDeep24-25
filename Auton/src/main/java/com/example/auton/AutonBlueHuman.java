@@ -9,23 +9,22 @@ public class AutonBlueHuman implements Auton {
     public void Run(Runner runner){
         // Note that the robot won't actually be aligned with the center of the samples,
         // but will actually be a little offset. This ensures that we don't accidentally hit something else
-        // go to the first sample
-        runner.move(b -> b.splineTo(new Vector2d(-44,16), Math.toRadians(90)));
+        // go to the first two samples
+        runner.move(b -> b.splineTo(new Vector2d(-53,16), Math.toRadians(90)));
         // take it to the observation zone
         runner.move(b -> b.lineToY(60));
         // Rinse and repeat
-        // Move towards the second sample
+        // Move towards the last sample
         runner.move(b -> b.lineToY(8));
-        runner.move(b -> b.splineTo(new Vector2d(-54,16), Math.toRadians(90)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-63, 16)).waitSeconds(0.1));
         // take it to the observation zone
         runner.move(b -> b.lineToY(60));
-        // Move towards the third sample
-        runner.move(b -> b.lineToY(8));
-        runner.move(b -> b.splineTo(new Vector2d(-60,16), Math.toRadians(90)));
-        // take it to the observation zone
-        runner.move(b -> b.lineToY(60));
+        // auton done, i guess; go back to the starting position
+        runner.move(b -> b.strafeTo(new Vector2d(-50, getStartingPose().position.y)));
+        runner.move(b -> b.turnTo(0));
+        runner.move(b -> b.lineToXConstantHeading(getStartingPose().position.x));
     }
     public Pose2d getStartingPose() {
-        return new Pose2d(-72, 0, 0);
+        return new Pose2d(-64.5, 12, 0);
     }
 }
