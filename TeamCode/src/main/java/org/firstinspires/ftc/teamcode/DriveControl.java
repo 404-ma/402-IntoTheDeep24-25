@@ -46,8 +46,9 @@ public class DriveControl extends LinearOpMode {
 
         telemetry.clear();
 
-        double speedMultiplier = 1;
-        double lastSpeed = 1;
+        double speedMultiplier = 0.3;
+        double lastSpeed = speedMultiplier;
+        boolean isDescending = false;
 
         while (opModeIsActive()) {
             update_telemetry(gpIn1, gpIn2);
@@ -102,21 +103,9 @@ public class DriveControl extends LinearOpMode {
 
             }
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
+            if(isDescending)
+                isDescending = grabber.DescentTick();
             switch (inpType2) {
-
-                case LEFT_STICK_BUTTON_ON:
-                    if (speedMultiplier != 1) {
-                        lastSpeed = speedMultiplier;
-                        speedMultiplier = 1;
-                    }
-                    break;
-
-                case LEFT_STICK_BUTTON_OFF:
-                    if (lastSpeed != 1) {
-                        speedMultiplier = lastSpeed;
-                        lastSpeed = 1;
-                    }
-                    break;
                 case BUTTON_B:
                     if (grabber.isOpen())
                         grabber.Close();
@@ -127,10 +116,15 @@ public class DriveControl extends LinearOpMode {
                     grabber.SetHeight(0);
                     break;
                 case BUTTON_Y:
-                    grabber.SetHeight(2000);
+                    grabber.SetHeight(SingleMotorTest.PARAMS.motorMaxPosition);
+                    break;
+                case BUTTON_X:
+                    grabber.StartDescent();
+                    isDescending = true;
                     break;
                 case JOYSTICK:
                     grabber.ManualControl(gamepad2.right_stick_y);
+                    break;
             }
 
         }
@@ -148,12 +142,9 @@ public class DriveControl extends LinearOpMode {
 
         telemetry.addLine();
         telemetry.addLine("Gamepad #2");
-        String inpTime2 = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(gpi2.getTelemetry_InputLastTimestamp());
-        telemetry.addLine().addData("GP 2 Time", inpTime2);
-        telemetry.addLine().addData("GP2 Cnt", gpi2.getTelemetry_InputCount());
-        telemetry.addLine().addData("GP2 Input", gpi2.getTelemetry_InputLastType().toString());
-        telemetry.addLine().addData("L Joy  X", "%6.3f", gamepad2.left_stick_x).addData("Y", "%6.3f", gamepad2.left_stick_y);
-        telemetry.addLine().addData("R Joy  X", "%6.3f", gamepad2.right_stick_x).addData("Y", "%6.3f", gamepad2.right_stick_y);
+        telemetry.addLine("Press B to open/close the claw");
+        telemetry.addLine("Use the right joystick to raise/lower the claw");
+        telemetry.addLine("Once the specimen is touching the bar, press X to automatically hang it");
         telemetry.update();
     }
 }

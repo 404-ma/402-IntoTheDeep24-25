@@ -20,7 +20,7 @@ public class SingleMotorTest extends LinearOpMode {
         public String motorName = "viperBasket";
         public boolean motorForward = false;
         public boolean motorZeroPowerStop = true;
-        public int motorMaxPosition = 2400;
+        public int motorMaxPosition = 5650;
         public double motorNearLimitPercent = 0.5;
         public int motorButtonYPosition = 2000;
     }
