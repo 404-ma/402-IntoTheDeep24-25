@@ -107,20 +107,22 @@ public class DriveControl extends LinearOpMode {
                 isDescending = grabber.DescentTick();
             switch (inpType2) {
                 case BUTTON_B:
-                    if (grabber.isOpen())
-                        grabber.Close();
-                    else
-                        grabber.Open();
-                    break;
-                case BUTTON_A:
-                    grabber.SetHeight(0);
-                    break;
-                case BUTTON_Y:
-                    grabber.SetHeight(SingleMotorTest.PARAMS.motorMaxPosition);
+                    grabber.Close();
                     break;
                 case BUTTON_X:
-                    grabber.StartDescent();
-                    isDescending = true;
+                    grabber.Open();
+                    break;
+                case BUTTON_A:
+                    grabber.HangSample();
+                    break;
+                case BUTTON_Y:
+                    grabber.GoToPickupHeight();
+                    break;
+                case DPAD_UP:
+                    grabber.GoToHighBar();
+                    break;
+                case DPAD_DOWN:
+                    grabber.GoToLowBar();
                     break;
                 case JOYSTICK:
                     grabber.ManualControl(gamepad2.right_stick_y);
