@@ -1,7 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.example.auton.Auton;
-import com.example.auton.AutonBlue;
+import com.example.auton.AutonBlueHuman;
 import com.example.auton.AutonRed;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
@@ -19,7 +19,7 @@ public class MeepMeepTesting {
         // And vice verse for red
         Auton auton;
         if(Objects.equals(args[0], "blue")){
-            auton = new AutonBlue();
+            auton = new AutonBlueHuman();
         } else if (Objects.equals(args[0], "red")) {
             auton = new AutonRed();
         }
@@ -31,7 +31,7 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
                 // Make sure the robot has the appropriate color and starting position
-                .setColorScheme(auton.getClass() == AutonBlue.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
+                .setColorScheme(auton.getClass() == AutonBlueHuman.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
                 .setStartPose(auton.getStartingPose())
                 .build();
         // Simulate the robot
