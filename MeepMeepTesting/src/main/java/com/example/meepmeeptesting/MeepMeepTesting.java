@@ -1,15 +1,15 @@
 package com.example.meepmeeptesting;
 
 import com.example.auton.Auton;
+import com.example.auton.AutonBlueBasket;
 import com.example.auton.AutonBlueHuman;
 import com.example.auton.AutonRedBasket;
+import com.example.auton.AutonRedHuman;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeRedDark;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
-
-import java.util.Objects;
 
 public class MeepMeepTesting {
     public static void main(String[] args) {
@@ -18,13 +18,21 @@ public class MeepMeepTesting {
         // If you have a CLI argument of "blue", it will run the blue auton
         // And vice verse for red
         Auton auton;
-        if(Objects.equals(args[0], "blue")){
-            auton = new AutonBlueHuman();
-        } else if (Objects.equals(args[0], "red")) {
-            auton = new AutonRedBasket();
-        }
-        else{
-            throw new RuntimeException("No Team Specified; Unable to start");
+        switch (args[0]) {
+            case "bluehuman":
+                auton = new AutonBlueHuman();
+                break;
+            case "redbasket":
+                auton = new AutonRedBasket();
+                break;
+            case "redhuman":
+                auton = new AutonRedHuman();
+                break;
+            case "bluebasket":
+                auton = new AutonBlueBasket();
+                break;
+            default:
+                throw new RuntimeException("No Auton Specified! What am I supposed to simulate?");
         }
         // Set up MeepMeep
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
