@@ -1,18 +1,18 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Vector2d;
-import com.example.auton.AutonRed;
+import com.example.auton.AutonRedBasket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
-@Autonomous(name = "**RED** Autonomous")
-public class AutonRedOp extends LinearOpMode {
+@Autonomous(name = "Auton RED BASKET ZONE")
+public class AutonRedBasketOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        AutonRed auton = new AutonRed();
+        AutonRedBasket auton = new AutonRedBasket();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
         waitForStart();

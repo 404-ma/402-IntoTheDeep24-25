@@ -2,7 +2,7 @@ package com.example.meepmeeptesting;
 
 import com.example.auton.Auton;
 import com.example.auton.AutonBlueHuman;
-import com.example.auton.AutonRed;
+import com.example.auton.AutonRedBasket;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeBlueDark;
 import com.noahbres.meepmeep.core.colorscheme.scheme.ColorSchemeRedDark;
@@ -21,7 +21,7 @@ public class MeepMeepTesting {
         if(Objects.equals(args[0], "blue")){
             auton = new AutonBlueHuman();
         } else if (Objects.equals(args[0], "red")) {
-            auton = new AutonRed();
+            auton = new AutonRedBasket();
         }
         else{
             throw new RuntimeException("No Team Specified; Unable to start");
