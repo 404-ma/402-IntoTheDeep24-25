@@ -48,7 +48,6 @@ public class DriveControl extends LinearOpMode {
 
         double speedMultiplier = 0.3;
         double lastSpeed = speedMultiplier;
-        boolean isDescending = false;
 
         while (opModeIsActive()) {
             update_telemetry(gpIn1, gpIn2);
@@ -103,8 +102,6 @@ public class DriveControl extends LinearOpMode {
 
             }
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
-            if(isDescending)
-                isDescending = grabber.DescentTick();
             switch (inpType2) {
                 case BUTTON_B:
                     grabber.Close();
@@ -127,6 +124,9 @@ public class DriveControl extends LinearOpMode {
                 case JOYSTICK:
                     grabber.ManualControl(gamepad2.right_stick_y);
                     break;
+                case RIGHT_STICK_BUTTON_ON:
+                    grabber.ResetEncoder();
+                    break;
             }
 
         }
@@ -141,12 +141,5 @@ public class DriveControl extends LinearOpMode {
         telemetry.addLine().addData("GP1 Input", gpi1.getTelemetry_InputLastType().toString());
         telemetry.addLine().addData("L Joy  X", "%6.3f", gamepad1.left_stick_x).addData("Y", "%6.3f", gamepad1.left_stick_y);
         telemetry.addLine().addData("R Joy  X", "%6.3f", gamepad1.right_stick_x).addData("Y", "%6.3f", gamepad1.right_stick_y);
-
-        telemetry.addLine();
-        telemetry.addLine("Gamepad #2");
-        telemetry.addLine("Press B to open/close the claw");
-        telemetry.addLine("Use the right joystick to raise/lower the claw");
-        telemetry.addLine("Once the specimen is touching the bar, press X to automatically hang it");
-        telemetry.update();
     }
 }
