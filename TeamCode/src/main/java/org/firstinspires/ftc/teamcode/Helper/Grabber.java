@@ -41,7 +41,8 @@ public class Grabber {
     public void ResetEncoder() {
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         SystemClock.sleep(20);
-        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setTargetPosition(0);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void Open() {
@@ -57,13 +58,12 @@ public class Grabber {
         height = Math.max(height, 0);
         motor.setTargetPosition(height);
         motor.setPower((height - motor.getCurrentPosition()) > 0 ? 1 : -1);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     // Use this when you want to raise and lower it w/ a joystick or something
     public void ManualControl(double throttle) {
         throttle = -throttle;
-        motor.setPower(throttle);
+        motor.setTargetPosition(motor.getCurrentPosition() + (int) Math.ceil(throttle));
     }
 
     public void GoToHighBar() {
