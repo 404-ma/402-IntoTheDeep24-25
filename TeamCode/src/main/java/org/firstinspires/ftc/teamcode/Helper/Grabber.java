@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 
 @Config
 public class Grabber {
@@ -63,7 +64,9 @@ public class Grabber {
     // Use this when you want to raise and lower it w/ a joystick or something
     public void ManualControl(double throttle) {
         throttle = -throttle;
-        motor.setTargetPosition(motor.getCurrentPosition() + (int) Math.ceil(throttle));
+        motor.getMode();
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setPower(Range.clip(throttle, -1, 1));
     }
 
     public void GoToHighBar() {
