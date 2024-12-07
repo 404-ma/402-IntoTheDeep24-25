@@ -36,14 +36,13 @@ public class Grabber {
         motor = hwMap.dcMotor.get(motorName);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        ResetEncoder();
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        SystemClock.sleep(20);
+        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void ResetEncoder() {
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        SystemClock.sleep(20);
-        motor.setTargetPosition(0);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void Open() {
@@ -54,39 +53,45 @@ public class Grabber {
         servo.setPosition(servoClosedPos);
     }
 
-    public void SetHeight(int height) {
-        height = Math.min(height, PARAMS.viperMaxHeight);
-        height = Math.max(height, 0);
-        motor.setTargetPosition(height);
-        motor.setPower((height - motor.getCurrentPosition()) > 0 ? 1 : -1);
-    }
+    //public void SetHeight(int height) {
+    //    height = Math.min(height, PARAMS.viperMaxHeight);
+    //    height = Math.max(height, 0);
+    //    motor.setTargetPosition(height);
+    //    motor.setPower((height - motor.getCurrentPosition()) > 0 ? 0.9 : -0.9);
+    //}
 
     // Use this when you want to raise and lower it w/ a joystick or something
     public void ManualControl(double throttle) {
-        throttle = -throttle;
-        motor.getMode();
-        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motor.setPower(Range.clip(throttle, -1, 1));
+        double power = -throttle;
+        if (motor.getMode() != DcMotor.RunMode.RUN_USING_ENCODER)
+            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setPower(power);
     }
 
     public void GoToHighBar() {
-        SetHeight(PARAMS.viperHighBarPos);
+        motor.setTargetPosition(PARAMS.viperHighBarPos);
+        motor.setPower(0.9);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void GoToLowBar() {
-        SetHeight(PARAMS.viperLowBarPos);
+        motor.setTargetPosition(PARAMS.viperLowBarPos);
+        motor.setPower(0.9);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void GoToPickupHeight() {
-        SetHeight(PARAMS.viperPickupPos);
+        motor.setTargetPosition(PARAMS.viperPickupPos);
+        motor.setPower(0.9);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void HangSample() {
         int pos = motor.getCurrentPosition();
         if (pos > PARAMS.viperHangOffset) {
-            SetHeight(pos - PARAMS.viperHangOffset);
-            SystemClock.sleep(500);
-            this.Open();
+            motor.setTargetPosition(pos - PARAMS.viperHangOffset);
+            motor.setPower(0.9);
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
     }
 }
