@@ -40,7 +40,7 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.525)
                 .setDimensions(14.5, 14.5)
                 // Make sure the robot has the appropriate color and starting position
-                .setColorScheme(auton.getClass() == AutonBlueHuman.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
+                .setColorScheme(auton.getClass() == AutonBlueHuman.class || auton.getClass() == AutonBlueBasket.class ? new ColorSchemeBlueDark() : new ColorSchemeRedDark())
                 .setStartPose(auton.getStartingPose())
                 .build();
         // Simulate the robot
