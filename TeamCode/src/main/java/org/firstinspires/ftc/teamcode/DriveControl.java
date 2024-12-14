@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
@@ -118,6 +119,9 @@ public class DriveControl extends LinearOpMode {
                 case DPAD_UP:
                     grabber.GoToHighBar();
                     break;
+                /*case DPAD_RIGHT:
+                    grabber.GoToHighBarNew();
+                    break;*/
                 case DPAD_DOWN:
                     grabber.GoToLowBar();
                     break;
@@ -135,11 +139,17 @@ public class DriveControl extends LinearOpMode {
 
     private void update_telemetry(GamePad gpi1, GamePad gpi2) {
         telemetry.addLine("Gamepad #1");
+        DcMotor viperMotor = hardwareMap.dcMotor.get("viperBasket");
         String inpTime1 = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(gpi1.getTelemetry_InputLastTimestamp());
         telemetry.addLine().addData("GP1 Time", inpTime1);
         telemetry.addLine().addData("GP1 Cnt", gpi1.getTelemetry_InputCount());
         telemetry.addLine().addData("GP1 Input", gpi1.getTelemetry_InputLastType().toString());
         telemetry.addLine().addData("L Joy  X", "%6.3f", gamepad1.left_stick_x).addData("Y", "%6.3f", gamepad1.left_stick_y);
         telemetry.addLine().addData("R Joy  X", "%6.3f", gamepad1.right_stick_x).addData("Y", "%6.3f", gamepad1.right_stick_y);
+        telemetry.addLine().addData("Motor Power: ", hardwareMap.dcMotor.get("viperBasket").getPower());
+        telemetry.addLine().addData("Motor Current Position: ", viperMotor.getCurrentPosition());
+        telemetry.addLine().addData("Motor Target Position: ",viperMotor.getTargetPosition());
+        telemetry.addLine().addData("Position Difference: ", (viperMotor.getTargetPosition() - viperMotor.getCurrentPosition()));
+        telemetry.update();
     }
 }

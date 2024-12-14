@@ -26,8 +26,8 @@ public class Grabber {
     final String servoName = "clawServo";
     final String motorName = "viperBasket";
 
-    final double servoOpenPos = 0.500;
-    final double servoClosedPos = 0.347;
+    final double servoOpenPos = 0.800;
+    final double servoClosedPos = 0.650;
 
 
     public Grabber(HardwareMap hwMap) {
@@ -73,6 +73,21 @@ public class Grabber {
         motor.setPower(0.9);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
+
+    /*public void GoToHighBarNew() {
+        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        while ((Math.abs(motor.getCurrentPosition() - PARAMS.viperHighBarPos)) >= 5) {
+            motor.setTargetPosition(PARAMS.viperHighBarPos);
+            //5500
+            double currentPos = motor.getCurrentPosition();
+            double error = (PARAMS.viperHighBarPos - currentPos);
+            double power = 0.9;
+            motor.setPower(power);
+            //motor.setPower(0.9);
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        motor.setPower(0.0);
+    }*/
 
     public void GoToLowBar() {
         motor.setTargetPosition(PARAMS.viperLowBarPos);

@@ -43,7 +43,7 @@ public class SingleMotorTest extends LinearOpMode {
         while (opModeIsActive()) {
             update_telemetry();
 
-            GamePad.GameplayInputType inpType = gpInput.WaitForGamepadInput(100);
+            GamePad.GameplayInputType inpType = gpInput.WaitForGamepadInput(30);
             switch (inpType) {
                 case BUTTON_L_BUMPER:
                     motor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -57,6 +57,13 @@ public class SingleMotorTest extends LinearOpMode {
                     motor.setTargetPosition(PARAMS.motorButtonYPosition);
                     motor.setPower(0.5);
                     motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    break;
+
+                case BUTTON_X:
+                    if (motor.getZeroPowerBehavior() == DcMotor.ZeroPowerBehavior.BRAKE)
+                        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                    else
+                        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                     break;
 
                 case BUTTON_A:
@@ -146,10 +153,19 @@ public class SingleMotorTest extends LinearOpMode {
         telemetry.addLine("Left Bumper  --> Forward");
         telemetry.addLine("Right Bumper --> Reverse/n");
 
+       /*String brakeString = "";
+       if (motor.getZeroPowerBehavior() == DcMotor.ZeroPowerBehavior.BRAKE) {
+           brakeString = "is Engaged!";
+       } else {
+           brakeString = "not Engaged!";
+       }*/
+
         String currTimestamp = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(new java.util.Date());
         telemetry.addLine().addData("Time      ", currTimestamp );
         telemetry.addLine().addData("Name       ", PARAMS.motorName );
         telemetry.addLine().addData("Zero Power ", ((PARAMS.motorZeroPowerStop) ? "Stop" : "Coast"));
+        telemetry.addLine().addData("Zero Power Behavior: ", motor.getZeroPowerBehavior());
+        //telemetry.addLine().addData("Brake is: " + brakeString);
         telemetry.addLine().addData("Direction  ", ((motor.getDirection() == DcMotorSimple.Direction.FORWARD) ? "Forward" : "Reverse") );
         telemetry.addLine().addData("Position   ", motor.getCurrentPosition() );
         telemetry.addLine().addData("Power      ", motor.getPower() );
