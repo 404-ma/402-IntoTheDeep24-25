@@ -28,7 +28,7 @@ public class Grabber {
 
     final double servoOpenPos = 0.800;
     final double servoClosedPos = 0.650;
-
+    int targetPosition = -1;
 
     public Grabber(HardwareMap hwMap) {
         servo = hwMap.servo.get(servoName);
@@ -67,46 +67,34 @@ public class Grabber {
             motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setPower(power);
     }
-
-    public void GoToHighBar() {
-        motor.setTargetPosition(PARAMS.viperHighBarPos);
+public void SetHeight(int position){
+        motor.setTargetPosition(position);
+        targetPosition = position;
         motor.setPower(0.9);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+}
+public void CheckForBrake(){
+        if(targetPosition != -1 && Math.abs(motor.getCurrentPosition() - targetPosition) <= 5){
+            motor.setPower(0.0);
+            targetPosition = -1;
+        }
+}
+    public void GoToHighBar() {
+        SetHeight(PARAMS.viperHighBarPos);
     }
 
-    /*public void GoToHighBarNew() {
-        motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        while ((Math.abs(motor.getCurrentPosition() - PARAMS.viperHighBarPos)) >= 5) {
-            motor.setTargetPosition(PARAMS.viperHighBarPos);
-            //5500
-            double currentPos = motor.getCurrentPosition();
-            double error = (PARAMS.viperHighBarPos - currentPos);
-            double power = 0.9;
-            motor.setPower(power);
-            //motor.setPower(0.9);
-            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        }
-        motor.setPower(0.0);
-    }*/
-
     public void GoToLowBar() {
-        motor.setTargetPosition(PARAMS.viperLowBarPos);
-        motor.setPower(0.9);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        SetHeight(PARAMS.viperLowBarPos);
     }
 
     public void GoToPickupHeight() {
-        motor.setTargetPosition(PARAMS.viperPickupPos);
-        motor.setPower(0.9);
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        SetHeight(PARAMS.viperPickupPos);
     }
 
     public void HangSample() {
         int pos = motor.getCurrentPosition();
         if (pos > PARAMS.viperHangOffset) {
-            motor.setTargetPosition(pos - PARAMS.viperHangOffset);
-            motor.setPower(0.9);
-            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            SetHeight(pos - PARAMS.viperHangOffset);
         }
     }
 }

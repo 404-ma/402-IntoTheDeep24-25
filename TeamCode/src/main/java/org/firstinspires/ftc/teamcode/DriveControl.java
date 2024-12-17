@@ -49,6 +49,7 @@ public class DriveControl extends LinearOpMode {
 
         double speedMultiplier = 0.3;
         double lastSpeed = speedMultiplier;
+        boolean highBarOn = false;
 
         while (opModeIsActive()) {
             update_telemetry(gpIn1, gpIn2);
@@ -119,9 +120,6 @@ public class DriveControl extends LinearOpMode {
                 case DPAD_UP:
                     grabber.GoToHighBar();
                     break;
-                /*case DPAD_RIGHT:
-                    grabber.GoToHighBarNew();
-                    break;*/
                 case DPAD_DOWN:
                     grabber.GoToLowBar();
                     break;
@@ -132,7 +130,9 @@ public class DriveControl extends LinearOpMode {
                     grabber.ResetEncoder();
                     break;
             }
-
+            grabber.CheckForBrake();
+//            if(highBarOn)
+//                highBarOn = grabber.GoToHighBarUpdate();
         }
     }
 
