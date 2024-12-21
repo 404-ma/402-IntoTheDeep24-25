@@ -6,17 +6,20 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
+import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
 @Autonomous(name = "Auton BLUE BASKET ZONE")
 public class AutonBlueBasketOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
+        Grabber grabber = new Grabber(hardwareMap);
+        grabber.Close();
         AutonBlueBasket auton = new AutonBlueBasket();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
         waitForStart();
-        auton.Run(runner);
+        auton.Run(runner, grabber);
     }
 
     private void updateTelemetry(MecanumDrive drive) {

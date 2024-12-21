@@ -45,7 +45,7 @@ public class MeepMeepTesting {
                 .build();
         // Simulate the robot
         MeepMeepRunner runner = new MeepMeepRunner(myBot);
-        auton.Run(runner);
+        auton.Run(runner, new MeepMeepGrabber());
         runner.Finish();
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
                 .setDarkMode(true)
