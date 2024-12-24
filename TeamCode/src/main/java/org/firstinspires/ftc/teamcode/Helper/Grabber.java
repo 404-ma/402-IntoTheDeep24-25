@@ -95,7 +95,7 @@ public class Grabber implements IGrabber {
 
     public static class Params {
         public int viperPickupPos = 600;
-        public int viperHighBarPos = 5650;
+        public int viperHighBarPos = 5700;
         public int viperLowBarPos = 2090;
         public int viperHangOffset = 1600;
         public int viperMaxHeight = 5600;

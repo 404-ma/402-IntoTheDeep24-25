@@ -13,7 +13,7 @@ public class AutonRedBasket implements Auton {
         grabber.HangSample();
         while (grabber.CheckForBrake()) ;
         grabber.Open();
-        runner.move(b -> b.waitSeconds(0.5).strafeTo(new Vector2d(-36, -48)));
+        runner.move(b -> b.waitSeconds(0.2).strafeTo(new Vector2d(-36, -48)));
         grabber.SetHeight(0);
         grabber.Close();
         runner.move(b -> b.waitSeconds(0.1).lineToY(-8));

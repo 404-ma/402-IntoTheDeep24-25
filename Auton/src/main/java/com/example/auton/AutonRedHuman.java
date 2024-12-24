@@ -7,30 +7,37 @@ import com.acmerobotics.roadrunner.Vector2d;
 public class AutonRedHuman implements Auton {
     public void Run(Runner runner, IGrabber grabber) {
         grabber.GoToHighBar();
-        runner.move(b -> b.lineToYConstantHeading(-43));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(6, -43)));
         while (grabber.CheckForBrake()) ;
-        runner.move(b -> b.lineToYConstantHeading(-39));
+        runner.move(b -> b.lineToYConstantHeading(-34));
         grabber.HangSample();
         while (grabber.CheckForBrake()) ;
         grabber.Open();
-        runner.move(b -> b.waitSeconds(0.5).strafeTo(new Vector2d(36, -48)));
-        grabber.SetHeight(0);
-        grabber.Close();
+        runner.move(b -> b.waitSeconds(0.2).strafeTo(new Vector2d(36, -48)));
+        grabber.GoToPickupHeight();
         runner.move(b -> b.waitSeconds(0.1).lineToY(-8));
         runner.move(b -> b.turnTo(Math.toRadians(90)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(50, -16)));
-        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
-        runner.move(b -> b.turnTo(Math.toRadians(135)));
-        runner.move(b -> b.lineToX(56));
-        runner.move(b -> b.strafeTo(new Vector2d(36, -8)));
-        runner.move(b -> b.turnTo(Math.toRadians(90)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(58, -16)));
-        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
-        runner.move(b -> b.turnTo(Math.toRadians(135)));
-        runner.move(b -> b.strafeTo(new Vector2d(36, -8)));
-        runner.move(b -> b.turnTo(Math.toRadians(90)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(64.5, -16)));
-        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -16)));
+        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-61));
+        while (grabber.CheckForBrake()) ;
+        grabber.Close();
+        runner.move(b -> b.waitSeconds(0.2));
+        grabber.GoToLowBar();
+        while (grabber.CheckForBrake()) ;
+        grabber.GoToHighBar();
+        runner.move(b -> b.strafeTo(new Vector2d(4, -50)));
+        runner.move(b -> b.turnTo(Math.toRadians(270)));
+        while (grabber.CheckForBrake()) ;
+        runner.move(b -> b.lineToYConstantHeading(-32));
+        grabber.HangSample();
+        while (grabber.CheckForBrake()) ;
+        grabber.Open();
+//        runner.move(b -> b.lineToYConstantHeading(-16));
+//        runner.move(b -> b.strafeToConstantHeading(new Vector2d8, -16)));
+//        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(4));
+//        runner.move(b -> b.lineToYConstantHeading(-16));
+//        runner.move(b -> b.strafeToConstantHeading(new Vector2d(64., -16)));
+//        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(4));
     }
 
     public Pose2d getStartingPose() {
