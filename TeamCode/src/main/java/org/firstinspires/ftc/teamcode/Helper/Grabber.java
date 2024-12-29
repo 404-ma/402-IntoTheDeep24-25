@@ -11,19 +11,28 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Grabber implements IGrabber {
+    public static class Params {
+        public String motorName = "viperBasket";
+        public int viperPickupPos = 10;
+        public int viperHighBarPos = 5700;
+        public int viperLowBarPos = 2090;
+        public int viperHangOffset = 1000;
+        public int viperMaxHeight = 5800;
+        public String servoName = "clawServo";
+        public double servoOpenPos = 0.505;
+        public double servoClosedPos = 0.46;
+    }
+
     public static Params PARAMS = new Params();
-    final String servoName = "clawServo";
-    final String motorName = "viperBasket";
-    final double servoOpenPos = 0.800;
-    final double servoClosedPos = 0.650;
+
     Servo servo;
     DcMotor motor;
     int targetPosition = -1;
 
     public Grabber(HardwareMap hwMap) {
-        servo = hwMap.servo.get(servoName);
-        servo.setPosition(servoOpenPos);
-        motor = hwMap.dcMotor.get(motorName);
+        servo = hwMap.servo.get(PARAMS.servoName);
+        servo.setPosition(PARAMS.servoOpenPos);
+        motor = hwMap.dcMotor.get(PARAMS.motorName);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -36,11 +45,11 @@ public class Grabber implements IGrabber {
     }
 
     public void Open() {
-        servo.setPosition(servoOpenPos);
+        servo.setPosition(PARAMS.servoOpenPos);
     }
 
     public void Close() {
-        servo.setPosition(servoClosedPos);
+        servo.setPosition(PARAMS.servoClosedPos);
     }
 
     // Use this when you want to raise and lower it w/ a joystick or something
@@ -51,17 +60,10 @@ public class Grabber implements IGrabber {
         motor.setPower(power);
     }
 
-    //public void SetHeight(int height) {
-    //    height = Math.min(height, PARAMS.viperMaxHeight);
-    //    height = Math.max(height, 0);
-    //    motor.setTargetPosition(height);
-    //    motor.setPower((height - motor.getCurrentPosition()) > 0 ? 0.9 : -0.9);
-    //}
-
     public void SetHeight(int position) {
         motor.setTargetPosition(position);
         targetPosition = position;
-        motor.setPower(0.9);
+        motor.setPower(0.8);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -93,11 +95,5 @@ public class Grabber implements IGrabber {
         }
     }
 
-    public static class Params {
-        public int viperPickupPos = 600;
-        public int viperHighBarPos = 5700;
-        public int viperLowBarPos = 2090;
-        public int viperHangOffset = 1600;
-        public int viperMaxHeight = 5600;
-    }
+
 }
