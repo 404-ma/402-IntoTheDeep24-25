@@ -17,10 +17,10 @@ public class Grabber implements IGrabber {
         public int viperHighBarPos = 5700;
         public int viperLowBarPos = 2090;
         public int viperHangOffset = 1000;
-        public int viperMaxHeight = 5800;
+        public int viperManualSpeedReductionHeight = 5000;
         public String servoName = "clawServo";
-        public double servoOpenPos = 0.505;
-        public double servoClosedPos = 0.46;
+        public double servoOpenPos = 0.48;
+        public double servoClosedPos = 0.45;
     }
 
     public static Params PARAMS = new Params();
@@ -54,7 +54,13 @@ public class Grabber implements IGrabber {
 
     // Use this when you want to raise and lower it w/ a joystick or something
     public void ManualControl(double throttle) {
-        double power = -throttle;
+        // Cap Raw Throttle Control When Close to Limit
+        double power = -throttle;  // Swap Joystick Direction
+        if ((power > 0) && (motor.getCurrentPosition() >= PARAMS.viperManualSpeedReductionHeight))
+            power = Math.min(power, 0.5);
+        else if ((power < 0) && (motor.getCurrentPosition() <= 200))
+            power = Math.max(power, -0.5);
+
         if (motor.getMode() != DcMotor.RunMode.RUN_USING_ENCODER)
             motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motor.setPower(power);
