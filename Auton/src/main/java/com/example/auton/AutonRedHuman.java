@@ -14,7 +14,7 @@ public class AutonRedHuman implements Auton {
         while (grabber.CheckForBrake()) ;
         grabber.Open();
         runner.move(b -> b.waitSeconds(0.2).strafeTo(new Vector2d(36, -48)));
-        grabber.GoToPickupHeight();
+        grabber.GoToPickupHeight(true);
         runner.move(b -> b.waitSeconds(0.1).lineToY(-8));
         runner.move(b -> b.turnTo(Math.toRadians(90)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -16)));

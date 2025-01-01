@@ -115,7 +115,7 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
-                    grabber.GoToPickupHeight();
+                    grabber.GoToPickupHeight(false);
                     break;
                 case DPAD_UP:
                     grabber.GoToHighBar();
