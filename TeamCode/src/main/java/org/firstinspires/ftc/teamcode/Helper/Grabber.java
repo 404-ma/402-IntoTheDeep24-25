@@ -13,9 +13,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Grabber implements IGrabber {
     public static class Params {
         public String motorName = "viperBasket";
-        public int viperPickupPos = 10;
-        public int viperHighBarPos = 5700;
-        public int viperLowBarPos = 2090;
+        public int viperPickupPos = 120;
+        public int viperHighBarPos = 5000;
+        public int viperLowBarPos = 1300;
         public int viperHangOffset = 1000;
         public int viperManualSpeedReductionHeight = 5000;
         public String servoName = "clawServo";
@@ -31,7 +31,6 @@ public class Grabber implements IGrabber {
 
     public Grabber(HardwareMap hwMap) {
         servo = hwMap.servo.get(PARAMS.servoName);
-        servo.setPosition(PARAMS.servoOpenPos);
         motor = hwMap.dcMotor.get(PARAMS.motorName);
         motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
