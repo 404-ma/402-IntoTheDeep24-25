@@ -11,22 +11,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Grabber implements IGrabber {
-    public static class Params {
-        public String motorName = "viperBasket";
-        public int viperPickupPos = 120;
-        public int viperHighBarPos = 5000;
-        public int viperLowBarPos = 1300;
-        public int viperHangOffset = 1000;
-        public int viperManualSpeedReductionHeight = 5000;
-        public String servoName = "clawServo";
-        public double servoOpenPos = 0.48;
-        public double servoClosedPos = 0.45;
-    }
-
     public static Params PARAMS = new Params();
-
     Servo servo;
     DcMotor motor;
+    boolean queueOpen;
     int targetPosition = -1;
 
     public Grabber(HardwareMap hwMap) {
@@ -76,6 +64,10 @@ public class Grabber implements IGrabber {
         if (targetPosition != -1 && Math.abs(motor.getCurrentPosition() - targetPosition) <= 5) {
             motor.setPower(0.0);
             targetPosition = -1;
+            if (queueOpen) {
+                queueOpen = false;
+                Open();
+            }
             return false;
         }
         return true;
@@ -89,7 +81,7 @@ public class Grabber implements IGrabber {
         SetHeight(PARAMS.viperLowBarPos);
     }
 
-    public void GoToPickupHeight( boolean override ) {
+    public void GoToPickupHeight(boolean override) {
         // Limit Ability to Break Claw, Only go to Hang Height if Below Low Bar
         int pos = motor.getCurrentPosition();
         if (!override && (pos <= PARAMS.viperLowBarPos)) {
@@ -101,7 +93,20 @@ public class Grabber implements IGrabber {
         int pos = motor.getCurrentPosition();
         if (pos > PARAMS.viperHangOffset) {
             SetHeight(pos - PARAMS.viperHangOffset);
+            queueOpen = true;
         }
+    }
+
+    public static class Params {
+        public String motorName = "viperBasket";
+        public int viperPickupPos = 0;
+        public int viperHighBarPos = 4800;
+        public int viperLowBarPos = 1300;
+        public int viperHangOffset = 1000;
+        public int viperManualSpeedReductionHeight = 5000;
+        public String servoName = "clawServo";
+        public double servoOpenPos = 0.48;
+        public double servoClosedPos = 0.45;
     }
 
 
