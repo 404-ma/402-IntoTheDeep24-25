@@ -4,7 +4,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 
 // The Auton used when playing red, and you want to move the three yellow samples into the basket zone
-public class AutonRedHuman implements Auton {
+public class AutonHuman implements Auton {
     public void Run(Runner runner, IGrabber grabber) {
         grabber.GoToHighBar();
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(6, -43)));
@@ -12,7 +12,6 @@ public class AutonRedHuman implements Auton {
         runner.move(b -> b.lineToYConstantHeading(-34));
         grabber.HangSample();
         while (grabber.CheckForBrake()) ;
-        grabber.Open();
         runner.move(b -> b.waitSeconds(0.2).strafeTo(new Vector2d(36, -48)));
         grabber.GoToPickupHeight(true);
         runner.move(b -> b.waitSeconds(0.1).lineToY(-8));
@@ -31,7 +30,6 @@ public class AutonRedHuman implements Auton {
         runner.move(b -> b.lineToYConstantHeading(-32));
         grabber.HangSample();
         while (grabber.CheckForBrake()) ;
-        grabber.Open();
 //        runner.move(b -> b.lineToYConstantHeading(-16));
 //        runner.move(b -> b.strafeToConstantHeading(new Vector2d8, -16)));
 //        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(4));

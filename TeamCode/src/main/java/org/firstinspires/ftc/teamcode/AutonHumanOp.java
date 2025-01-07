@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Vector2d;
-import com.example.auton.AutonBlueHuman;
+import com.example.auton.AutonHuman;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -9,13 +9,13 @@ import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
-@Autonomous(name = "Auton BLUE HUMAN (OBSERVATION ZONE)")
-public class AutonBlueHumanOp extends LinearOpMode {
+@Autonomous(name = "Auton HUMAN (OBSERVATION ZONE)")
+public class AutonHumanOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Grabber grabber = new Grabber(hardwareMap);
         grabber.Close();
-        AutonBlueHuman auton = new AutonBlueHuman();
+        AutonHuman auton = new AutonHuman();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
         waitForStart();
