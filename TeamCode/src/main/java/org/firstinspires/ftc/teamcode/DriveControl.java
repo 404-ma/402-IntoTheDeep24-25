@@ -115,7 +115,7 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
-                    grabber.GoToPickupHeight(false);
+                    grabber.GoToPickupHeight();
                     break;
                 case DPAD_UP:
                     grabber.GoToHighBar();
@@ -148,7 +148,7 @@ public class DriveControl extends LinearOpMode {
         telemetry.addLine().addData("R Joy  X", "%6.3f", gamepad1.right_stick_x).addData("Y", "%6.3f", gamepad1.right_stick_y);
         telemetry.addLine().addData("Motor Power: ", hardwareMap.dcMotor.get("viperBasket").getPower());
         telemetry.addLine().addData("Motor Current Position: ", viperMotor.getCurrentPosition());
-        telemetry.addLine().addData("Motor Target Position: ",viperMotor.getTargetPosition());
+        telemetry.addLine().addData("Motor Target Position: ", viperMotor.getTargetPosition());
         telemetry.addLine().addData("Position Difference: ", (viperMotor.getTargetPosition() - viperMotor.getCurrentPosition()));
         telemetry.update();
     }

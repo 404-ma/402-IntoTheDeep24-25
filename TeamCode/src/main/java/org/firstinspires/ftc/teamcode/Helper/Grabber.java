@@ -81,12 +81,8 @@ public class Grabber implements IGrabber {
         SetHeight(PARAMS.viperLowBarPos);
     }
 
-    public void GoToPickupHeight(boolean override) {
-        // Limit Ability to Break Claw, Only go to Hang Height if Below Low Bar
-        int pos = motor.getCurrentPosition();
-        if (!override && (pos <= PARAMS.viperLowBarPos)) {
-            SetHeight(PARAMS.viperPickupPos);
-        }
+    public void GoToPickupHeight() {
+        SetHeight(PARAMS.viperPickupPos);
     }
 
     public void HangSample() {

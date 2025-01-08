@@ -24,7 +24,7 @@ public class MeepMeepGrabber implements IGrabber {
         System.out.println("Go to low bar");
     }
 
-    public void GoToPickupHeight(boolean override) {
+    public void GoToPickupHeight() {
         System.out.println("Go to pickup height");
     }
 

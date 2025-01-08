@@ -11,7 +11,7 @@ public interface IGrabber {
 
     void GoToLowBar();
 
-    void GoToPickupHeight(boolean override);
+    void GoToPickupHeight();
 
     void HangSample();
 
