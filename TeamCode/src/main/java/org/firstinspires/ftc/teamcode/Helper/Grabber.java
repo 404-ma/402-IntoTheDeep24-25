@@ -48,7 +48,7 @@ public class Grabber implements IGrabber {
                 power = 0;
             else if (motor.getCurrentPosition() >= PARAMS.viperManualSpeedReductionHeight)
                 power = Math.min(power, 0.3);
-        } else if ((power < 0) && (motor.getCurrentPosition() <= 200))
+        } else if ((power < 0) && (motor.getCurrentPosition() <= 500))
             power = Math.max(power, -0.3);
 
         if (motor.getMode() != DcMotor.RunMode.RUN_USING_ENCODER)
