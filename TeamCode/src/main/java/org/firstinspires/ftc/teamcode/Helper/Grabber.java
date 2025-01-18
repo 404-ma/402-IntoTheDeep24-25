@@ -64,7 +64,7 @@ public class Grabber implements IGrabber {
     }
 
     public boolean CheckForBrake() {
-        if (targetPosition != -1 && Math.abs(motor.getCurrentPosition() - targetPosition) <= 5) {
+        if (targetPosition != -1 && Math.abs(motor.getCurrentPosition() - targetPosition) <= 75) {
             motor.setPower(0.0);
             targetPosition = -1;
             if (queueOpen) {
