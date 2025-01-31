@@ -32,6 +32,6 @@ public class AutonBasket implements Auton {
     }
 
     public Pose2d getStartingPose() {
-        return new Pose2d(-12, -64, Math.toRadians(270));
+        return new Pose2d(-12, -70, Math.toRadians(270));
     }
 }
