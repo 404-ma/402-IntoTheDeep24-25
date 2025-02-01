@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.Helper.GamePad;
 public class SingleServoTest extends LinearOpMode {
     public static class Params {
         public String servoName = "clawServo";
+        public String servoToTeset = "elbowServo";
         public boolean servoForward = true;
         public double servoStartPos = 0.412;
         public double servoPresetPosX = 0.412;
@@ -27,6 +28,7 @@ public class SingleServoTest extends LinearOpMode {
     private GamePad gpInput;
     private FtcDashboard dashboard;
     private Servo servo;
+    private Servo servoToTest;
 
     private boolean tlmServoForward = false;
     private double tlmServoPosition = 0;
@@ -102,6 +104,7 @@ public class SingleServoTest extends LinearOpMode {
         // Initialize Helpers
         try {
             servo = hardwareMap.servo.get(PARAMS.servoName);
+            servoToTest = hardwareMap.servo.get(PARAMS.servoToTeset);
             gpInput = new GamePad(gamepad1);
             dashboard = FtcDashboard.getInstance();
             dashboard.clearTelemetry();
@@ -130,6 +133,7 @@ public class SingleServoTest extends LinearOpMode {
         telemetry.addLine().addData("Direction", (tlmServoForward ? "Forward" : "Reverse") );
         telemetry.addLine().addData("Curr Pos ", tlmServoPosition );
         telemetry.addLine().addData("New Pos ", newPosition );
+        telemetry.addLine().addData("Elbow Servo Pos ", servoToTest.getPosition());
         telemetry.update();
 
 
