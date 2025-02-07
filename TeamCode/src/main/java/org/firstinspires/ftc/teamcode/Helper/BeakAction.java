@@ -17,28 +17,28 @@ import org.firstinspires.ftc.teamcode.Helper.DeferredActions;
 public class BeakAction {
     public static class Params {
         // Drive Position - Protect Arm
-        public double armDrivePos = 0.345;
-        public double elbowDrivePos = 0.835;
+        public double armDrivePos = 0.300;
+        public double elbowDrivePos = 0.800;
 
         // Sample Pickup Start - Clear Submersible Bar
-        public double armPickStartPos = 0.4; //?
-        public double elbowPickStartPos = 0.805;
+        public double armPickStartPos = 0.300; //?
+        public double elbowPickStartPos = 0.790;
 
         // Pickup Reach Position - Minimum Reach
-        public double armPickReachPos = 0.5;
-        public double elbowPickReachPos = 0.805;
+        public double armPickReachPos = 0.3250;
+        public double elbowPickReachPos = 0.810;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.60;
-        public double elbowPickReachMiddlePos = 0.865;
+        public double armPickReachMiddlePos = 0.550;
+        public double elbowPickReachMiddlePos = 0.871;
 
         // Beak Positions
         public double beakOpenGatherPos = 0.3;
         public double beakClosedPos = 0.7;
 
         //new values
-        public double armPickupMinPos = 0.345;
-        public double armPickupMaxPos = 0.72;
+        public double armPickupMinPos = 0.3250;
+        public double armPickupMaxPos = 0.923;
     }
 
     public static Params PARAMS = new Params();

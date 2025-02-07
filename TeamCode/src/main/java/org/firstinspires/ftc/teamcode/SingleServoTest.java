@@ -15,12 +15,12 @@ import org.firstinspires.ftc.teamcode.Helper.GamePad;
 @TeleOp(name="Single Servo Test", group ="Diagnostic")
 public class SingleServoTest extends LinearOpMode {
     public static class Params {
-        public String servoName = "clawServo";
+        public String servoName = "armServo";
         public String servoToTeset = "elbowServo";
         public boolean servoForward = true;
-        public double servoStartPos = 0.412;
-        public double servoPresetPosX = 0.412;
-        public double ServoPresetPosB = 0.347;
+        public double servoStartPos = 0.300;
+        public double servoPresetPosX = 0.500;
+        public double ServoPresetPosB = 0.800;
     }
 
     public static Params PARAMS = new Params();
@@ -57,23 +57,23 @@ public class SingleServoTest extends LinearOpMode {
             GamePad.GameplayInputType inpType = gpInput.WaitForGamepadInput(100);
             switch (inpType) {
                 case BUTTON_A:
-                    servo.setPosition(newPosition);
+                    servoToTest.setPosition(newPosition);
                     tlmServoPosition = newPosition;
                     break;
 
                 case BUTTON_L_BUMPER:
                     tlmServoForward = !tlmServoForward;
-                    servo.setDirection(tlmServoForward ? Servo.Direction.FORWARD : Servo.Direction.REVERSE);
+                    servoToTest.setDirection(tlmServoForward ? Servo.Direction.FORWARD : Servo.Direction.REVERSE);
                     break;
 
                 case BUTTON_X:
                     newPosition = PARAMS.servoPresetPosX;
-                    servo.setPosition(newPosition);
+                    servoToTest.setPosition(newPosition);
                     break;
 
                 case BUTTON_B:
                     newPosition = PARAMS.ServoPresetPosB;
-                    servo.setPosition(newPosition);
+                    servoToTest.setPosition(newPosition);
                     break;
 
                 case DPAD_UP:
