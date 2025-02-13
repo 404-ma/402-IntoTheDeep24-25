@@ -18,10 +18,14 @@ public class AutonBasket implements Auton {
         runner.move(b -> b.waitSeconds(0.1).lineToY(-8));
         runner.move(b -> b.turnTo(Math.toRadians(90)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-48, -16)));
-        beak.PrepForPickup();
+        beak.PickupReach();
+        new DeferTimer(2).Wait();
+        beak.CloseBeak();
+        new DeferTimer(0.5).Wait();
         runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
         runner.move(b -> b.turnTo(Math.toRadians(45)));
         runner.move(b -> b.lineToX(-54));
+        beak.OpenBeak();
         runner.move(b -> b.lineToX(-48));
         runner.move(b -> b.turnTo(Math.toRadians(90)));
         runner.move(b -> b.lineToYConstantHeading(-16));
