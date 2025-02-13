@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
+import org.firstinspires.ftc.teamcode.Helper.BeakAction;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
@@ -15,11 +16,14 @@ public class AutonHumanOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Grabber grabber = new Grabber(hardwareMap);
         grabber.Close();
+        BeakAction beakAction = new BeakAction(hardwareMap);
+        beakAction.DrivePosition();
+        while (!beakAction.HasReachedTarget()) ;
         AutonHuman auton = new AutonHuman();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
         waitForStart();
-        auton.Run(runner, grabber);
+        auton.Run(runner, grabber, beakAction);
     }
 
     private void updateTelemetry(MecanumDrive drive) {

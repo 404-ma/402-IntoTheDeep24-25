@@ -3,13 +3,14 @@ package org.firstinspires.ftc.teamcode.Helper;
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.example.auton.IBeak;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 
 @Config
-public class BeakAction {
+public class BeakAction implements IBeak {
     public static Params PARAMS = new Params();
     public static double targetArmPosition = -1;
     public static double targetElbowPosition = -1;
@@ -135,23 +136,23 @@ public class BeakAction {
         public double elbowDrivePos = 0.800;
 
         // Sample Pickup Start - Clear Submersible Bar
-        public double armPickStartPos = 0.300; //?
-        public double elbowPickStartPos = 0.790;
+        public double armPickStartPos = 0.62; //?
+        public double elbowPickStartPos = 0.8;
 
         // Pickup Reach Position - Minimum Reach
         public double armPickReachPos = 0.3250;
-        public double elbowPickReachPos = 0.810;
+        public double elbowPickReachPos = 0.8;
 
         // Pickup Reach Position - Middle Reach
         public double armPickReachMiddlePos = 0.550;
-        public double elbowPickReachMiddlePos = 0.871;
+        public double elbowPickReachMiddlePos = 0.825;
 
         // Beak Positions
-        public double beakOpenGatherPos = 0.3;
-        public double beakClosedPos = 0.7;
+        public double beakOpenGatherPos = 0.7;
+        public double beakClosedPos = 0.915;
 
         //new values
-        public double armPickupMinPos = 0.3250;
-        public double armPickupMaxPos = 0.923;
+        public double armPickupMinPos = 0.62;
+        public double armPickupMaxPos = 0.83;
     }
 }

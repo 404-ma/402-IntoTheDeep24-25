@@ -12,24 +12,13 @@ import org.firstinspires.ftc.teamcode.Helper.GamePad;
 
 
 @Config
-@TeleOp(name="Single Servo Test", group ="Diagnostic")
+@TeleOp(name = "Single Servo Test", group = "Diagnostic")
 public class SingleServoTest extends LinearOpMode {
-    public static class Params {
-        public String servoName = "armServo";
-        public String servoToTeset = "elbowServo";
-        public boolean servoForward = true;
-        public double servoStartPos = 0.300;
-        public double servoPresetPosX = 0.500;
-        public double ServoPresetPosB = 0.800;
-    }
-
     public static Params PARAMS = new Params();
-
     private GamePad gpInput;
     private FtcDashboard dashboard;
     private Servo servo;
     private Servo servoToTest;
-
     private boolean tlmServoForward = false;
     private double tlmServoPosition = 0;
     private double newPosition = 0;
@@ -98,7 +87,7 @@ public class SingleServoTest extends LinearOpMode {
     public boolean initialize() {
         // Load Introduction and Wait for Start
         telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE);
-        telemetry.addLine().addData("Servo Test: ", PARAMS.servoName );
+        telemetry.addLine().addData("Servo Test: ", PARAMS.servoName);
         telemetry.addLine();
 
         // Initialize Helpers
@@ -129,21 +118,30 @@ public class SingleServoTest extends LinearOpMode {
         telemetry.addLine("  Left/Right +/- 0.005");
         telemetry.addLine("Button A --> GoTo New Position");
         telemetry.addLine("Left Bumper --> Change Direction/n");
-        telemetry.addLine().addData("Name     ", PARAMS.servoName );
-        telemetry.addLine().addData("Direction", (tlmServoForward ? "Forward" : "Reverse") );
-        telemetry.addLine().addData("Curr Pos ", tlmServoPosition );
-        telemetry.addLine().addData("New Pos ", newPosition );
+        telemetry.addLine().addData("Name     ", PARAMS.servoName);
+        telemetry.addLine().addData("Direction", (tlmServoForward ? "Forward" : "Reverse"));
+        telemetry.addLine().addData("Curr Pos ", tlmServoPosition);
+        telemetry.addLine().addData("New Pos ", newPosition);
         telemetry.addLine().addData("Elbow Servo Pos ", servoToTest.getPosition());
         telemetry.update();
 
 
         // FTC Dashboard Telemetry
         TelemetryPacket packet = new TelemetryPacket();
-        packet.put("Name", PARAMS.servoName );
+        packet.put("Name", PARAMS.servoName);
         packet.put("Direction", (tlmServoForward ? "Forward" : "Reverse"));
         packet.put("Curr Position", tlmServoPosition);
         packet.put("New Position", newPosition);
         dashboard.sendTelemetryPacket(packet);
+    }
+
+    public static class Params {
+        public String servoName = "beakServo";
+        public String servoToTeset = "beakServo";
+        public boolean servoForward = true;
+        public double servoStartPos = 0.300;
+        public double servoPresetPosX = 0.300;
+        public double ServoPresetPosB = 0.700;
     }
 
 }

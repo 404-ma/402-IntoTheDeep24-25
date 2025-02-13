@@ -74,18 +74,12 @@ public class AutonHuman implements Auton {
 
 package com.example.auton;
 
-import com.acmerobotics.roadrunner.Arclength;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.Pose2dDual;
-import com.acmerobotics.roadrunner.PosePath;
 import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.VelConstraint;
-
-import org.jetbrains.annotations.NotNull;
 
 // The Auton used when playing red, and you want to move the three yellow samples into the basket zone
 public class AutonHuman implements Auton {
-    public void Run(Runner runner, IGrabber grabber) {
+    public void Run(Runner runner, IGrabber grabber, IBeak beak) {
         grabber.GoToHighBar();
         runner.move(b -> b.strafeTo(new Vector2d(8, -43)));
         while (grabber.CheckForBrake()) ;

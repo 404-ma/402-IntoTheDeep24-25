@@ -142,12 +142,16 @@ public class DriveControl extends LinearOpMode {
                     break;
                 case LEFT_TRIGGER:
                     beakAction.pickUpJoystick(-gamepad2.left_trigger);
+                    break;
                 case LEFT_STICK_BUTTON_ON:
                     beakAction.DrivePosition();
+                    break;
                 case DPAD_RIGHT:
                     beakAction.PickupReach();
+                    break;
                 case DPAD_LEFT:
-                    beakAction.PrepForPickup();
+                    beakAction.PickupReachMiddle();
+                    break;
                 case BUTTON_R_BUMPER:
                     beakAction.ToggleBeak();
                     break;
