@@ -35,8 +35,7 @@ public class DriveControl extends LinearOpMode {
         telemetry.addLine();
         telemetry.addData(">", "Press Start to Launch");
         telemetry.update();
-
-        int initRes = initialize();
+        beakAction = new BeakAction(hardwareMap);
         beakAction.DrivePosition();
 
         GamePad gpIn1 = new GamePad(gamepad1, false);
@@ -49,7 +48,7 @@ public class DriveControl extends LinearOpMode {
 //        HapticEventBusTester hapticEvent = HapticEventBusTester.getInstance();
 
         waitForStart();
-        if (isStopRequested() || initRes == 1) {
+        if (isStopRequested()) {
             return;
         }
 
@@ -165,8 +164,8 @@ public class DriveControl extends LinearOpMode {
 
     private void ProcessDeferredActions() {
         List<DeferredActions.DeferredActionType> action = DeferredActions.GetReadyActions();
-        for(DeferredActions.DeferredActionType actionType: action){
-            switch(actionType){
+        for (DeferredActions.DeferredActionType actionType : action) {
+            switch (actionType) {
                 case BEAK_OPEN:
                     beakAction.OpenBeak();
                     break;
@@ -183,18 +182,6 @@ public class DriveControl extends LinearOpMode {
         }
     }
 
-    private int initialize() {
-        try {
-            beakAction = new BeakAction(hardwareMap);
-        }
-        catch(Exception e) {
-            telemetry.clear();
-            telemetry.addLine("AN ERROR OCCURED: "+e.toString());
-            telemetry.update();
-            return 1;
-        }
-        return 0;
-    }
 
     private void update_telemetry(GamePad gpi1, GamePad gpi2) {
         telemetry.addLine("Gamepad #1");
