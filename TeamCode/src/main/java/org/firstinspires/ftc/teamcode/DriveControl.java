@@ -19,9 +19,7 @@ import java.util.Locale;
 @Config
 @TeleOp(name = "Driver Control", group = "Competition!!")
 public class DriveControl extends LinearOpMode {
-
-
-    private static final String version = "1.0";
+    private static final String version = "1.1";
     private boolean setReversed = false;
     // private ClawMoves yclaw;
     private BeakAction beakAction;
@@ -119,6 +117,7 @@ public class DriveControl extends LinearOpMode {
 
 
             }
+
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
             switch (inpType2) {
                 case BUTTON_B:
@@ -145,10 +144,8 @@ public class DriveControl extends LinearOpMode {
                 case RIGHT_STICK_BUTTON_ON:
                     grabber.ResetEncoder();
                     break;
-
-
-
             }
+
             grabber.CheckForBrake();
             ProcessDeferredActions();
 //            if(highBarOn)
