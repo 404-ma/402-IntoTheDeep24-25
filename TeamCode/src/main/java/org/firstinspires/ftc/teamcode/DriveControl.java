@@ -65,41 +65,49 @@ public class DriveControl extends LinearOpMode {
 
             GamePad.GameplayInputType inpType1 = gpIn1.WaitForGamepadInput(30);
             switch (inpType1) {
-                case LEFT_STICK_BUTTON_ON:
-                    if (speedMultiplier != 1) {
-                        lastSpeed = speedMultiplier;
-                        speedMultiplier = 1;
-                    }
-                    break;
-
-                case LEFT_STICK_BUTTON_OFF:
-                    if (lastSpeed != 1) {
-                        speedMultiplier = lastSpeed;
-                        lastSpeed = 1;
-                    }
-                    break;
-
                 case BUTTON_A:
-//                    Set<String> targets = new HashSet<>();
-//                    targets.add("haptic");
-//                    EventBus.getInstance().emit(targets, gpIn1);
-                    speedMultiplier = 0.25;
+                    beakAction.CloseBeak();
                     break;
-
-                case BUTTON_X:
-                    speedMultiplier = 0.75;
-                    break;
-
-                case BUTTON_B:
-                    speedMultiplier = 0.5;
-                    break;
-
                 case BUTTON_Y:
-                    speedMultiplier = 1;
+                    beakAction.OpenBeak();
+                    break;
+                case BUTTON_B:
+                    beakAction.PickupReach();
+                    break;
+                case BUTTON_X:
+                    beakAction.PickupReachMiddle();
+                    break;
+                case RIGHT_TRIGGER:
+                    beakAction.pickUpJoystick(gamepad2.right_trigger);
+                    break;
+                case LEFT_TRIGGER:
+                    beakAction.pickUpJoystick(-gamepad2.left_trigger);
+                    break;
+                case BUTTON_R_BUMPER:
+                    beakAction.ToggleBeak();
+                    break;
+                case BUTTON_L_BUMPER:
+                    beakAction.changingArmUp();
+                    break;
+                case LEFT_STICK_BUTTON_ON:
+                    beakAction.DrivePosition();
                     break;
 
                 case BUTTON_BACK:
                     setReversed = !setReversed;
+                    break;
+
+                case DPAD_DOWN:
+                    speedMultiplier = 0.25;
+                    break;
+                case DPAD_LEFT:
+                    speedMultiplier = 0.75;
+                    break;
+                case DPAD_RIGHT:
+                    speedMultiplier = 0.5;
+                    break;
+                case DPAD_UP:
+                    speedMultiplier = 1;
                     break;
 
                 case JOYSTICK:
@@ -114,10 +122,10 @@ public class DriveControl extends LinearOpMode {
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
             switch (inpType2) {
                 case BUTTON_B:
-                    grabber.Close();
+                    grabber.Open();
                     break;
                 case BUTTON_X:
-                    grabber.Open();
+                    grabber.Close();
                     break;
                 case BUTTON_A:
                     grabber.HangSample();
@@ -137,27 +145,9 @@ public class DriveControl extends LinearOpMode {
                 case RIGHT_STICK_BUTTON_ON:
                     grabber.ResetEncoder();
                     break;
-                case RIGHT_TRIGGER:
-                    beakAction.pickUpJoystick(gamepad2.right_trigger);
-                    break;
-                case LEFT_TRIGGER:
-                    beakAction.pickUpJoystick(-gamepad2.left_trigger);
-                    break;
-                case LEFT_STICK_BUTTON_ON:
-                    beakAction.DrivePosition();
-                    break;
-                case DPAD_RIGHT:
-                    beakAction.PickupReach();
-                    break;
-                case DPAD_LEFT:
-                    beakAction.PickupReachMiddle();
-                    break;
-                case BUTTON_R_BUMPER:
-                    beakAction.ToggleBeak();
-                    break;
-                case BUTTON_L_BUMPER:
-                    beakAction.changingArmUp();
-                    break;
+
+
+
             }
             grabber.CheckForBrake();
             ProcessDeferredActions();
