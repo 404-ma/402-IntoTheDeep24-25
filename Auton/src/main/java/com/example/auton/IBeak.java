@@ -9,6 +9,8 @@ public interface IBeak {
 
     void PickupReach();
 
+    void PickupReachMiddle();
+
     void CloseBeak();
 
     void OpenBeak();

@@ -144,7 +144,7 @@ public class BeakAction implements IBeak {
         public double elbowPickReachPos = 0.8;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.550;
+        public double armPickReachMiddlePos = 0.70;
         public double elbowPickReachMiddlePos = 0.825;
 
         // Beak Positions

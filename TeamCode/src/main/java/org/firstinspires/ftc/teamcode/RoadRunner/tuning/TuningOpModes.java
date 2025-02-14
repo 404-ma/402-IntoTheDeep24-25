@@ -36,17 +36,18 @@ public final class TuningOpModes {
 
     public static final boolean DISABLED = true;   // Disable Tuning when Not it Use
 
-    private TuningOpModes() {}
+    private TuningOpModes() {
+    }
 
     private static OpModeMeta metaForClass(Class<? extends OpMode> cls) {
         String prefix = "RR ";
-        if (cls.getSimpleName().equals("ForwardPushTest"))  prefix += "1. ";
-        if (cls.getSimpleName().equals("ForwardRampLogger"))  prefix += "2. ";
-        if (cls.getSimpleName().equals("LateralRampLogger"))  prefix += "3. ";
-        if (cls.getSimpleName().equals("AngularRampLogger"))  prefix += "4. ";
-        if (cls.getSimpleName().equals("ManualFeedforwardTuner"))  prefix += "5. ";
-        if (cls.getSimpleName().equals("ManualFeedbackTuner"))  prefix += "6. ";
-        if (cls.getSimpleName().equals("SplineTest"))  prefix += "7. ";
+        if (cls.getSimpleName().equals("ForwardPushTest")) prefix += "1. ";
+        if (cls.getSimpleName().equals("ForwardRampLogger")) prefix += "2. ";
+        if (cls.getSimpleName().equals("LateralRampLogger")) prefix += "3. ";
+        if (cls.getSimpleName().equals("AngularRampLogger")) prefix += "4. ";
+        if (cls.getSimpleName().equals("ManualFeedforwardTuner")) prefix += "5. ";
+        if (cls.getSimpleName().equals("ManualFeedbackTuner")) prefix += "6. ";
+        if (cls.getSimpleName().equals("SplineTest")) prefix += "7. ";
 
         return new OpModeMeta.Builder()
                 .setName(prefix + cls.getSimpleName())
@@ -86,7 +87,7 @@ public final class TuningOpModes {
                 }
 
                 return new DriveView(
-                    DriveType.MECANUM,
+                        DriveType.MECANUM,
                         MecanumDrive.PARAMS.inPerTick,
                         MecanumDrive.PARAMS.maxWheelVel,
                         MecanumDrive.PARAMS.minProfileAccel,
@@ -135,7 +136,7 @@ public final class TuningOpModes {
                 }
 
                 return new DriveView(
-                    DriveType.TANK,
+                        DriveType.TANK,
                         TankDrive.PARAMS.inPerTick,
                         TankDrive.PARAMS.maxWheelVel,
                         TankDrive.PARAMS.minProfileAccel,

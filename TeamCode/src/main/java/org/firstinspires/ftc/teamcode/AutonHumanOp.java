@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Vector2d;
 import com.example.auton.AutonHuman;
+import com.example.auton.DeferTimer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -18,7 +19,7 @@ public class AutonHumanOp extends LinearOpMode {
         grabber.Close();
         BeakAction beakAction = new BeakAction(hardwareMap);
         beakAction.DrivePosition();
-        while (!beakAction.HasReachedTarget()) ;
+        new DeferTimer(1).Wait();
         AutonHuman auton = new AutonHuman();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);

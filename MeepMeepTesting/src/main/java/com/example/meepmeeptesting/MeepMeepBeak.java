@@ -20,6 +20,10 @@ public class MeepMeepBeak implements IBeak {
         System.out.println("Pickup reach");
     }
 
+    public void PickupReachMiddle() {
+        System.out.println("Pickup reach middle");
+    }
+
     public void CloseBeak() {
         System.out.println("Close beak");
     }
