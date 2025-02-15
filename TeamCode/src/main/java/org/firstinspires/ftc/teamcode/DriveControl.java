@@ -29,6 +29,15 @@ public class DriveControl extends LinearOpMode {
     @Override
     public void runOpMode() {
         // Load Introduction and Wait for Start
+        //TODO: Get values for the following properties
+        // elbowSuplexPos -
+        // armSuplexPos -
+        // beakClosedDelay -
+        // beakSuplexDelay -
+        // elbowSuplexSafeDelay -
+        // bucketStartPos -
+        // bucketCatchPos -
+        // bucketDumpPos -
         telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE);
         telemetry.addLine("Driver Control");
         telemetry.addData("Version Number", version);
