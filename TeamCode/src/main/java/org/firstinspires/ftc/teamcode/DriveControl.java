@@ -67,6 +67,8 @@ public class DriveControl extends LinearOpMode {
 
             GamePad.GameplayInputType inpType1 = gpIn1.WaitForGamepadInput(30);
             switch (inpType1) {
+                case BUTTON_Y:
+                    beakAction.SuplexSample();
                 case BUTTON_B:
                     beakAction.PickupReach();
                     break;
@@ -114,12 +116,10 @@ public class DriveControl extends LinearOpMode {
 
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
             switch (inpType2) {
-                case BUTTON_B:
-                    grabber.Open();
-                    break;
-                case BUTTON_X:
-                    grabber.Close();
-                    break;
+                case BUTTON_R_BUMPER:
+                    grabber.ToggleClaw();
+                case BUTTON_L_BUMPER:
+                    bucketAction.ToggleBucket();
                 case BUTTON_A:
                     grabber.HangSample();
                     break;
@@ -159,6 +159,9 @@ public class DriveControl extends LinearOpMode {
                     break;
                 case BEAK_DRIVE_SAFE:
                     beakAction.DrivePosition();
+                    break;
+                case SUPLEX_BEAK:
+                    beakAction.SuplexSample();
                     break;
                 default:
                     telemetry.addLine("ERROR - Unsupported Deferred Action");

@@ -39,6 +39,14 @@ public class Grabber implements IGrabber {
         servo.setPosition(PARAMS.servoClosedPos);
     }
 
+    public void ToggleClaw() {
+        if (PARAMS.servoOpenPos - 0.02 <= servo.getPosition()) {
+            Close();
+        } else {
+            Open();
+        }
+    }
+
     // Use this when you want to raise and lower it w/ a joystick or something
     public void ManualControl(double throttle) {
         // Cap Raw Throttle Control When Close to Limit
