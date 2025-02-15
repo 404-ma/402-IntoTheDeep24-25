@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.BeakAction;
+import org.firstinspires.ftc.teamcode.Helper.BucketAction;
 import org.firstinspires.ftc.teamcode.Helper.DeferredActions;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
 import org.firstinspires.ftc.teamcode.Helper.GamePad;
@@ -23,6 +24,7 @@ public class DriveControl extends LinearOpMode {
     private boolean setReversed = false;
     // private ClawMoves yclaw;
     private BeakAction beakAction;
+    private BucketAction bucketAction;
 
     @Override
     public void runOpMode() {
@@ -34,7 +36,9 @@ public class DriveControl extends LinearOpMode {
         telemetry.addData(">", "Press Start to Launch");
         telemetry.update();
         beakAction = new BeakAction(hardwareMap);
+        bucketAction = new BucketAction(hardwareMap);
         beakAction.DrivePosition();
+        bucketAction.StartPosition();
 
         GamePad gpIn1 = new GamePad(gamepad1, false);
         GamePad gpIn2 = new GamePad(gamepad2);
@@ -63,12 +67,6 @@ public class DriveControl extends LinearOpMode {
 
             GamePad.GameplayInputType inpType1 = gpIn1.WaitForGamepadInput(30);
             switch (inpType1) {
-                case BUTTON_A:
-                    beakAction.CloseBeak();
-                    break;
-                case BUTTON_Y:
-                    beakAction.OpenBeak();
-                    break;
                 case BUTTON_B:
                     beakAction.PickupReach();
                     break;
@@ -90,11 +88,9 @@ public class DriveControl extends LinearOpMode {
                 case LEFT_STICK_BUTTON_ON:
                     beakAction.DrivePosition();
                     break;
-
                 case BUTTON_BACK:
                     setReversed = !setReversed;
                     break;
-
                 case DPAD_DOWN:
                     speedMultiplier = 0.25;
                     break;
@@ -114,8 +110,6 @@ public class DriveControl extends LinearOpMode {
                             gamepad1.right_stick_x * (float) speedMultiplier,
                             -gamepad1.left_stick_y * (float) speedMultiplier, setReversed);
                     break;
-
-
             }
 
             GamePad.GameplayInputType inpType2 = gpIn2.WaitForGamepadInput(30);
