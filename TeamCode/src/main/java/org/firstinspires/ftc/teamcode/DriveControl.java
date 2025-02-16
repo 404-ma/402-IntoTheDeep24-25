@@ -46,8 +46,7 @@ public class DriveControl extends LinearOpMode {
         telemetry.update();
         beakAction = new BeakAction(hardwareMap);
         bucketAction = new BucketAction(hardwareMap);
-        beakAction.DrivePosition();
-        bucketAction.StartPosition();
+
 
         GamePad gpIn1 = new GamePad(gamepad1, false);
         GamePad gpIn2 = new GamePad(gamepad2);
@@ -63,7 +62,8 @@ public class DriveControl extends LinearOpMode {
             return;
         }
 
-
+        beakAction.DrivePosition();
+        bucketAction.StartPosition();
         telemetry.clear();
 
         double speedMultiplier = 0.3;

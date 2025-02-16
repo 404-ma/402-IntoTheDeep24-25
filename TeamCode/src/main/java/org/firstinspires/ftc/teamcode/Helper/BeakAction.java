@@ -23,8 +23,10 @@ public class BeakAction implements IBeak {
         //   super();
         beak = hardwareMap.servo.get("beakServo");
         beak.setDirection(Servo.Direction.FORWARD);
+
         arm = hardwareMap.servo.get("armServo");
         arm.setDirection(Servo.Direction.FORWARD);
+
         elbow = hardwareMap.servo.get("elbowServo");
         elbow.setDirection(Servo.Direction.FORWARD);
     }
@@ -47,7 +49,7 @@ public class BeakAction implements IBeak {
     public void DrivePosition() {
         MoveArm(PARAMS.armDrivePos);
         MoveElbow(PARAMS.elbowDrivePos);
-        MoveBeak(PARAMS.beakClosedPos);
+        MoveBeak(PARAMS.beakOpenGatherPos);
     }
 
     public void PrepForPickup() {
@@ -76,8 +78,8 @@ public class BeakAction implements IBeak {
             MoveBeak(PARAMS.beakClosedPos);
             DeferredActions.CreateDeferredAction((long) PARAMS.beakClosedDelay, DeferredActions.DeferredActionType.SUPLEX_BEAK);
         } else {
-            SuplexArmPos();
-            SuplexElbPos();
+            MoveArm(PARAMS.armSuplexPos);
+            MoveElbow(PARAMS.elbowSuplexPos);
             DeferredActions.CreateDeferredAction( (long) PARAMS.beakSuplexDelay, DeferredActions.DeferredActionType.BEAK_OPEN);
             DeferredActions.CreateDeferredAction((long) PARAMS.elbowSuplexSafeDelay, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
         }
@@ -145,33 +147,34 @@ public class BeakAction implements IBeak {
 
     public static class Params {
         // Drive Position - Protect Arm
-        public double armDrivePos = 0.300;
-        public double elbowDrivePos = 0.800;
+        public double armDrivePos = 0.515;
+        public double elbowDrivePos = 0.579;
 
         // Sample Pickup Start - Clear Submersible Bar
         public double armPickStartPos = 0.62; //?
         public double elbowPickStartPos = 0.8;
 
         // Pickup Reach Position - Minimum Reach
-        public double armPickReachPos = 0.3250;
-        public double elbowPickReachPos = 0.8;
+        public double armPickReachPos = 0.61;
+        public double elbowPickReachPos = 0.5;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.66;
-        public double elbowPickReachMiddlePos = 0.825;
+        public double armPickReachMiddlePos = 0.64;
+        public double elbowPickReachMiddlePos = 0.52;
 
         // Beak Positions
-        public double beakOpenGatherPos = 0.58;
-        public double beakClosedPos = 0.915;
+        public double beakOpenGatherPos = 0.275;
+        public double beakClosedPos = 0.5;
 
         //Suplex Positions
-        public double elbowSuplexPos = 0.00; //Change this
-        public double armSuplexPos = 0.00; // Change this
+        public double armSuplexPos = 0.515; // Change this
+        public double elbowSuplexPos = 0.6; //Change this
+
 
         //Suplex Timing Delays
-        public double beakClosedDelay = 0.00; // Change this
-        public double beakSuplexDelay = 0.00; //Change this
-        public double elbowSuplexSafeDelay = 0.00; //Change this
+        public double beakClosedDelay = 50; // Change this
+        public double beakSuplexDelay = 1000; //Change this
+        public double elbowSuplexSafeDelay = 1200; //Change this
 
         //new values
         public double armPickupMinPos = 0.62;

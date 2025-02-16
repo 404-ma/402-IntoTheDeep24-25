@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class BucketAction {
     public static class Params {
-        public double bucketStartPos = 0.32;   // Tucked in For Driving
-        public double bucketCatchPos = 0.31;  // Catch from Beak
-        public double bucketDumpPos = 0.22;    // Dump to Basket
+        public double bucketStartPos = 0.58;   // Tucked in For Driving
+        public double bucketCatchPos = 0.58;  // Catch from Beak
+        public double bucketDumpPos = 0.31;    // Dump to Basket
         //Need to update these values with 402 bucket
     }
 

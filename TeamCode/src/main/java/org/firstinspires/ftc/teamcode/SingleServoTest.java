@@ -14,6 +14,15 @@ import org.firstinspires.ftc.teamcode.Helper.GamePad;
 @Config
 @TeleOp(name = "Single Servo Test", group = "Diagnostic")
 public class SingleServoTest extends LinearOpMode {
+    public static class Params {
+        public String servoName = "armServo";
+        public String servoToTeset = "elbowServo";
+        public boolean servoForward = true;
+        public double servoStartPos = 0.300;
+        public double servoPresetPosX = 0.300;
+        public double ServoPresetPosB = 0.700;
+    }
+
     public static Params PARAMS = new Params();
     private GamePad gpInput;
     private FtcDashboard dashboard;
@@ -135,13 +144,5 @@ public class SingleServoTest extends LinearOpMode {
         dashboard.sendTelemetryPacket(packet);
     }
 
-    public static class Params {
-        public String servoName = "beakServo";
-        public String servoToTeset = "beakServo";
-        public boolean servoForward = true;
-        public double servoStartPos = 0.300;
-        public double servoPresetPosX = 0.300;
-        public double ServoPresetPosB = 0.700;
-    }
 
 }
