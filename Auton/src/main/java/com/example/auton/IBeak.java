@@ -5,11 +5,11 @@ public interface IBeak {
 
     void DrivePosition();
 
-    void PrepForPickup();
-
-    void PickupReach();
+    void PickupReachClose();
 
     void PickupReachMiddle();
+
+    void PickupReachMaximum();
 
     void CloseBeak();
 
@@ -21,5 +21,4 @@ public interface IBeak {
 
     void changingArmDown();
 
-    void beakStart();
 }

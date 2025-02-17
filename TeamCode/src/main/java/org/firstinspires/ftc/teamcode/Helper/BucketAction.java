@@ -2,15 +2,16 @@ package org.firstinspires.ftc.teamcode.Helper;
 
 import androidx.annotation.NonNull;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Config
 public class BucketAction {
     public static class Params {
         public double bucketStartPos = 0.58;   // Tucked in For Driving
         public double bucketCatchPos = 0.58;  // Catch from Beak
-        public double bucketDumpPos = 0.31;    // Dump to Basket
-        //Need to update these values with 402 bucket
+        public double bucketDumpPos = 0.49;    // Dump to Basket
     }
 
     public static Params PARAMS = new Params();

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Config
-@TeleOp(name = "Motor Test", group = "Competition!!")
+@TeleOp(name = "Motor Test", group = "Test")
 public class MotorTest extends LinearOpMode {
 
 

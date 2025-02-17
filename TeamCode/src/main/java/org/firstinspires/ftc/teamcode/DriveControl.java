@@ -22,40 +22,30 @@ import java.util.Locale;
 public class DriveControl extends LinearOpMode {
     private static final String version = "1.1";
     private boolean setReversed = false;
-    // private ClawMoves yclaw;
+
+    private GamePad gpIn1;
+    private GamePad gpIn2;
+    private DrivetrainV2 drvTrain;
     private BeakAction beakAction;
     private BucketAction bucketAction;
+    private Grabber grabber;
 
     @Override
     public void runOpMode() {
         // Load Introduction and Wait for Start
-        //TODO: Get values for the following properties
-        // elbowSuplexPos -
-        // armSuplexPos -
-        // beakClosedDelay -
-        // beakSuplexDelay -
-        // elbowSuplexSafeDelay -
-        // bucketStartPos -
-        // bucketCatchPos -
-        // bucketDumpPos -
         telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE);
         telemetry.addLine("Driver Control");
         telemetry.addData("Version Number", version);
         telemetry.addLine();
         telemetry.addData(">", "Press Start to Launch");
         telemetry.update();
+
+        gpIn1 = new GamePad(gamepad1, false);
+        gpIn2 = new GamePad(gamepad2, false);
+        drvTrain = new DrivetrainV2(hardwareMap);
         beakAction = new BeakAction(hardwareMap);
         bucketAction = new BucketAction(hardwareMap);
-
-
-        GamePad gpIn1 = new GamePad(gamepad1, false);
-        GamePad gpIn2 = new GamePad(gamepad2);
-        DrivetrainV2 drvTrain = new DrivetrainV2(hardwareMap);
-        Grabber grabber = new Grabber(hardwareMap);
-        // TestServo serv1 = hardwareMap.servo.get(PARAMS.);
-
-//        new HapticEventBusTester();
-//        HapticEventBusTester hapticEvent = HapticEventBusTester.getInstance();
+        grabber = new Grabber(hardwareMap);
 
         waitForStart();
         if (isStopRequested()) {
@@ -67,22 +57,23 @@ public class DriveControl extends LinearOpMode {
         telemetry.clear();
 
         double speedMultiplier = 0.3;
-        double lastSpeed = speedMultiplier;
-        boolean highBarOn = false;
 
         while (opModeIsActive()) {
-            update_telemetry(gpIn1, gpIn2);
-
+            update_telemetry();
 
             GamePad.GameplayInputType inpType1 = gpIn1.WaitForGamepadInput(30);
             switch (inpType1) {
                 case BUTTON_Y:
                     beakAction.SuplexSample();
+                    break;
                 case BUTTON_B:
-                    beakAction.PickupReach();
+                    beakAction.PickupReachClose();
                     break;
                 case BUTTON_X:
                     beakAction.PickupReachMiddle();
+                    break;
+                case BUTTON_A:
+                    beakAction.PickupReachMaximum();
                     break;
                 case RIGHT_TRIGGER:
                     beakAction.pickUpJoystick(gamepad2.right_trigger);
@@ -116,7 +107,6 @@ public class DriveControl extends LinearOpMode {
                     break;
 
                 case JOYSTICK:
-//                    gpIn1.HapticsController.runShortHaptic();
                     drvTrain.setDriveVectorFromJoystick(-gamepad1.left_stick_x * (float) speedMultiplier,
                             gamepad1.right_stick_x * (float) speedMultiplier,
                             -gamepad1.left_stick_y * (float) speedMultiplier, setReversed);
@@ -127,8 +117,10 @@ public class DriveControl extends LinearOpMode {
             switch (inpType2) {
                 case BUTTON_R_BUMPER:
                     grabber.ToggleClaw();
+                    break;
                 case BUTTON_L_BUMPER:
                     bucketAction.ToggleBucket();
+                    break;
                 case BUTTON_A:
                     grabber.HangSample();
                     break;
@@ -151,8 +143,6 @@ public class DriveControl extends LinearOpMode {
 
             grabber.CheckForBrake();
             ProcessDeferredActions();
-//            if(highBarOn)
-//                highBarOn = grabber.GoToHighBarUpdate();
         }
     }
 
@@ -180,19 +170,28 @@ public class DriveControl extends LinearOpMode {
     }
 
 
-    private void update_telemetry(GamePad gpi1, GamePad gpi2) {
+    private void update_telemetry() {
         telemetry.addLine("Gamepad #1");
-        DcMotor viperMotor = hardwareMap.dcMotor.get("viperBasket");
-        String inpTime1 = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(gpi1.getTelemetry_InputLastTimestamp());
+
+        String inpTime1 = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(gpIn1.getTelemetry_InputLastTimestamp());
         telemetry.addLine().addData("GP1 Time", inpTime1);
-        telemetry.addLine().addData("GP1 Cnt", gpi1.getTelemetry_InputCount());
-        telemetry.addLine().addData("GP1 Input", gpi1.getTelemetry_InputLastType().toString());
-        telemetry.addLine().addData("L Joy  X", "%6.3f", gamepad1.left_stick_x).addData("Y", "%6.3f", gamepad1.left_stick_y);
-        telemetry.addLine().addData("R Joy  X", "%6.3f", gamepad1.right_stick_x).addData("Y", "%6.3f", gamepad1.right_stick_y);
-        telemetry.addLine().addData("Motor Power: ", hardwareMap.dcMotor.get("viperBasket").getPower());
-        telemetry.addLine().addData("Motor Current Position: ", viperMotor.getCurrentPosition());
-        telemetry.addLine().addData("Motor Target Position: ", viperMotor.getTargetPosition());
-        telemetry.addLine().addData("Position Difference: ", (viperMotor.getTargetPosition() - viperMotor.getCurrentPosition()));
+        telemetry.addLine().addData("GP1 Cnt", gpIn1.getTelemetry_InputCount());
+        telemetry.addLine().addData("GP1 Input", gpIn1.getTelemetry_InputLastType().toString());
+        telemetry.addLine();
+
+        String inpTime2 = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(gpIn2.getTelemetry_InputLastTimestamp());
+        telemetry.addLine().addData("GP2 Time", inpTime2);
+        telemetry.addLine().addData("GP2 Cnt", gpIn2.getTelemetry_InputCount());
+        telemetry.addLine().addData("GP2 Input", gpIn2.getTelemetry_InputLastType().toString());
+        telemetry.addLine();
+
+        telemetry.addLine("Deferred Actions");
+        String actTime = new java.text.SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US).format(DeferredActions.tlmLastActionTimestamp);
+        telemetry.addLine().addData("Time", actTime);
+        telemetry.addLine().addData("Action", DeferredActions.tlmLastAction.toString());
+
+        DcMotor viperMotor = hardwareMap.dcMotor.get("viperBasket");
+        telemetry.addLine().addData("Viper Position: ", viperMotor.getCurrentPosition());
         telemetry.update();
     }
 }

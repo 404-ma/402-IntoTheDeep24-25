@@ -52,44 +52,36 @@ public class BeakAction implements IBeak {
         MoveBeak(PARAMS.beakOpenGatherPos);
     }
 
-    public void PrepForPickup() {
+    public void PickupReachClose() {
         MoveBeak(PARAMS.beakOpenGatherPos);
-        MoveElbow(PARAMS.elbowPickStartPos);
-        MoveArm(PARAMS.armPickStartPos);
-    }
-
-    public void PickupReach() {
         MoveElbow(PARAMS.elbowPickReachPos);
         MoveArm(PARAMS.armPickReachPos);
-        if (targetBeakPosition != PARAMS.beakOpenGatherPos)
-            MoveBeak(PARAMS.beakOpenGatherPos);
     }
 
-    public void SuplexElbPos() {
-        MoveElbow(PARAMS.elbowSuplexPos);
+    public void PickupReachMiddle() {
+        MoveBeak(PARAMS.beakOpenGatherPos);
+        MoveElbow(PARAMS.elbowPickReachMiddlePos);
+        MoveArm(PARAMS.armPickReachMiddlePos);
     }
 
-    public void SuplexArmPos() {
-        MoveArm(PARAMS.armSuplexPos);
+    public void PickupReachMaximum() {
+        MoveBeak(PARAMS.beakOpenGatherPos);
+        MoveElbow(PARAMS.elbowPickReachMaxPos);
+        MoveArm(PARAMS.armPickReachMaxPos);
     }
 
     public void SuplexSample() {
         if (targetBeakPosition != PARAMS.beakClosedPos)  {
             MoveBeak(PARAMS.beakClosedPos);
-            DeferredActions.CreateDeferredAction((long) PARAMS.beakClosedDelay, DeferredActions.DeferredActionType.SUPLEX_BEAK);
+            DeferredActions.CreateDeferredAction((long) PARAMS.delayBeakClosed, DeferredActions.DeferredActionType.SUPLEX_BEAK);
         } else {
-            MoveArm(PARAMS.armSuplexPos);
             MoveElbow(PARAMS.elbowSuplexPos);
-            DeferredActions.CreateDeferredAction( (long) PARAMS.beakSuplexDelay, DeferredActions.DeferredActionType.BEAK_OPEN);
-            DeferredActions.CreateDeferredAction((long) PARAMS.elbowSuplexSafeDelay, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
+            MoveArm(PARAMS.armSuplexPos);
+            DeferredActions.CreateDeferredAction( (long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
+            DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexToDrivePos, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
         }
     }
 
-    public void PickupReachMiddle() {
-        MoveBeak(PARAMS.beakOpenGatherPos);
-        MoveArm(PARAMS.armPickReachMiddlePos);
-        MoveElbow(PARAMS.elbowPickReachMiddlePos);
-    }
 
     public void CloseBeak() {
         MoveBeak(PARAMS.beakClosedPos);
@@ -141,26 +133,23 @@ public class BeakAction implements IBeak {
         }
     }
 
-    public void beakStart() {
-        MoveBeak(0.40);
-    }
 
     public static class Params {
         // Drive Position - Protect Arm
-        public double armDrivePos = 0.515;
-        public double elbowDrivePos = 0.579;
-
-        // Sample Pickup Start - Clear Submersible Bar
-        public double armPickStartPos = 0.62; //?
-        public double elbowPickStartPos = 0.8;
+        public double armDrivePos = 0.498;
+        public double elbowDrivePos = 0.576;
 
         // Pickup Reach Position - Minimum Reach
         public double armPickReachPos = 0.61;
         public double elbowPickReachPos = 0.5;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.64;
-        public double elbowPickReachMiddlePos = 0.52;
+        public double armPickReachMiddlePos = 0.655;
+        public double elbowPickReachMiddlePos = 0.528;
+
+        // Pickup Reach Position - Maximum Reach
+        public double armPickReachMaxPos = 0.755;
+        public double elbowPickReachMaxPos = 0.565;
 
         // Beak Positions
         public double beakOpenGatherPos = 0.275;
@@ -172,12 +161,12 @@ public class BeakAction implements IBeak {
 
 
         //Suplex Timing Delays
-        public double beakClosedDelay = 50; // Change this
-        public double beakSuplexDelay = 1000; //Change this
-        public double elbowSuplexSafeDelay = 1200; //Change this
+        public double delayBeakClosed = 75; // Change this
+        public double delaySuplexBeakOpen = 700; //Change this
+        public double delaySuplexToDrivePos = 900; //Change this
 
         //new values
-        public double armPickupMinPos = 0.62;
-        public double armPickupMaxPos = 0.83;
+        public double armPickupMinPos = 0.61;
+        public double armPickupMaxPos = 0.755;
     }
 }

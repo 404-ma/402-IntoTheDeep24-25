@@ -32,15 +32,15 @@ public class Grabber implements IGrabber {
     }
 
     public void Open() {
-        servo.setPosition(PARAMS.servoOpenPos);
+        servo.setPosition(PARAMS.clawOpenPos);
     }
 
     public void Close() {
-        servo.setPosition(PARAMS.servoClosedPos);
+        servo.setPosition(PARAMS.clawClosedPos);
     }
 
     public void ToggleClaw() {
-        if (PARAMS.servoOpenPos - 0.02 <= servo.getPosition()) {
+        if (PARAMS.clawOpenPos - 0.02 <= servo.getPosition()) {
             Close();
         } else {
             Open();
@@ -113,10 +113,10 @@ public class Grabber implements IGrabber {
         public int viperLowBarPos = 1300;
         public int viperHangOffset = 1000;
         public int viperManualSpeedReductionHeight = 5000;
-        public int viperMaxHeight = 5700;
+        public int viperMaxHeight = 5800;
         public String servoName = "clawServo";
-        public double servoOpenPos = 0.51;
-        public double servoClosedPos = 0.455;
+        public double clawOpenPos = 0.51;
+        public double clawClosedPos = 0.455;
     }
 
 
