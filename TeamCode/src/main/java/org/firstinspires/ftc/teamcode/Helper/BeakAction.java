@@ -100,7 +100,7 @@ public class BeakAction implements IBeak {
     }
 
     public double conversion(double input) {
-        double elbPos = 0.774589 * Math.pow(input, 0.311196);
+        double elbPos = 4.55606 * Math.pow(input, 2) - 5.62539 * input + 2.24709;
         return elbPos;
     }
 
@@ -149,7 +149,7 @@ public class BeakAction implements IBeak {
 
         // Pickup Reach Position - Maximum Reach
         public double armPickReachMaxPos = 0.755;
-        public double elbowPickReachMaxPos = 0.565;
+        public double elbowPickReachMaxPos = .595;
 
         // Beak Positions
         public double beakOpenGatherPos = 0.275;
@@ -157,7 +157,7 @@ public class BeakAction implements IBeak {
 
         //Suplex Positions
         public double armSuplexPos = 0.515; // Change this
-        public double elbowSuplexPos = 0.6; //Change this
+        public double elbowSuplexPos = 0.56; //Change this
 
 
         //Suplex Timing Delays
