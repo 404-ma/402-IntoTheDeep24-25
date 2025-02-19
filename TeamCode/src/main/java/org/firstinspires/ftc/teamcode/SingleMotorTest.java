@@ -17,7 +17,7 @@ import java.util.Locale;
 @TeleOp(name="Single Motor Test", group ="Diagnostic")
 public class SingleMotorTest extends LinearOpMode {
     public static class Params {
-        public String motorName = "viperBasket";
+        public String motorName = "hangMotor";
         public boolean motorForward = false;
         public boolean motorZeroPowerStop = true;
         public int motorMaxPosition = 5650;
@@ -54,9 +54,9 @@ public class SingleMotorTest extends LinearOpMode {
                     break;
 
                 case BUTTON_Y:
-                    motor.setTargetPosition(PARAMS.motorButtonYPosition);
+                    //motor.setTargetPosition(PARAMS.motorButtonYPosition);
                     motor.setPower(0.5);
-                    motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    //motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     break;
 
                 case BUTTON_X:
@@ -67,9 +67,9 @@ public class SingleMotorTest extends LinearOpMode {
                     break;
 
                 case BUTTON_A:
-                    motor.setTargetPosition(0);
+                   // motor.setTargetPosition(0);
                     motor.setPower(-0.5);
-                    motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    //motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     break;
 
                 case BUTTON_B:
@@ -104,7 +104,7 @@ public class SingleMotorTest extends LinearOpMode {
                         }
                     }
 
-                    motor.setPower( power );
+                    motor.setPower(power);
                     break;
             }
         }
@@ -166,7 +166,7 @@ public class SingleMotorTest extends LinearOpMode {
         telemetry.addLine().addData("Zero Power ", ((PARAMS.motorZeroPowerStop) ? "Stop" : "Coast"));
         telemetry.addLine().addData("Zero Power Behavior: ", motor.getZeroPowerBehavior());
         //telemetry.addLine().addData("Brake is: " + brakeString);
-        telemetry.addLine().addData("Direction  ", ((motor.getDirection() == DcMotorSimple.Direction.FORWARD) ? "Forward" : "Reverse") );
+        telemetry.addLine().addData("Direction  ", ((motor.getDirection() == DcMotorSimple.Direction.FORWARD) ? "Reverse" : "Forward") );
         telemetry.addLine().addData("Position   ", motor.getCurrentPosition() );
         telemetry.addLine().addData("Power      ", motor.getPower() );
         telemetry.update();

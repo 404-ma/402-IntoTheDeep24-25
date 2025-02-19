@@ -67,7 +67,7 @@ public class Grabber implements IGrabber {
     public void SetHeight(int position) {
         motor.setTargetPosition(position);
         targetPosition = position;
-        motor.setPower(0.9);
+        motor.setPower(0.99);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -109,14 +109,14 @@ public class Grabber implements IGrabber {
     public static class Params {
         public String motorName = "viperBasket";
         public int viperPickupPos = 0;
-        public int viperHighBarPos = 4800;
+        public int viperHighBarPos = 4900;
         public int viperLowBarPos = 1300;
-        public int viperHangOffset = 1000;
+        public int viperHangOffset = 1200; //1000
         public int viperManualSpeedReductionHeight = 5000;
         public int viperMaxHeight = 5800;
         public String servoName = "clawServo";
         public double clawOpenPos = 0.51;
-        public double clawClosedPos = 0.455;
+        public double clawClosedPos = 0.452;
     }
 
 

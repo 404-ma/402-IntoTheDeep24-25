@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
 import org.firstinspires.ftc.teamcode.Helper.BeakAction;
+import org.firstinspires.ftc.teamcode.Helper.BucketAction;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
@@ -20,6 +21,8 @@ public class AutonHumanOp extends LinearOpMode {
         BeakAction beakAction = new BeakAction(hardwareMap);
         beakAction.DrivePosition();
         new DeferTimer(1).Wait();
+        BucketAction bucketAction = new BucketAction(hardwareMap);
+        bucketAction.StartPosition();
         AutonHuman auton = new AutonHuman();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);

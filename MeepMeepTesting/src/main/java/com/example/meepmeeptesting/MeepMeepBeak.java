@@ -44,6 +44,14 @@ public class MeepMeepBeak implements IBeak {
         System.out.println("changing arm down");
     }
 
+    public void PickupReachMaximum() {
+        System.out.println("Pickup Reach Maximum");
+    }
+
+    public void PickupReachClose() {
+        System.out.println("Pickup Reach Close");
+    }
+
     public void beakStart() {
         System.out.println("beak start");
     }
