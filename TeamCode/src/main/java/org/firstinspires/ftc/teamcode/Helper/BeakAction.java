@@ -136,8 +136,8 @@ public class BeakAction implements IBeak {
 
     public static class Params {
         // Drive Position - Protect Arm
-        public double armDrivePos = 0.498;
-        public double elbowDrivePos = 0.576;
+        public double armDrivePos = 0.5;
+        public double elbowDrivePos = 0.585;
 
         // Pickup Reach Position - Minimum Reach
         public double armPickReachPos = 0.61;
