@@ -20,7 +20,6 @@ public class BeakAction implements IBeak {
     private final Servo elbow;
 
     public BeakAction(@NonNull HardwareMap hardwareMap) {
-        //   super();
         beak = hardwareMap.servo.get("beakServo");
         beak.setDirection(Servo.Direction.FORWARD);
 
@@ -99,20 +98,17 @@ public class BeakAction implements IBeak {
         }
     }
 
-    public double conversion(double input) {
-        double elbPos = 4.55606 * Math.pow(input, 2) - 5.62539 * input + 2.24709;
-        return elbPos;
-    }
 
     public void pickUpJoystick(float power) {
-        boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
-
-        if (rightPosition) {
-            double armPos = Range.clip((targetArmPosition + (power * 0.004)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
-            double elbPos = conversion(armPos);
-            MoveArm(armPos);
-            MoveElbow(elbPos);
-        }
+        // Rework for New Beak Hardware
+//        boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
+//
+//        if (rightPosition) {
+//            double armPos = Range.clip((targetArmPosition + (power * 0.004)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
+//            double elbPos = conversion(armPos);
+//            MoveArm(armPos);
+//            MoveElbow(elbPos);
+//        }
     }
 
     public void changingArmUp() {
