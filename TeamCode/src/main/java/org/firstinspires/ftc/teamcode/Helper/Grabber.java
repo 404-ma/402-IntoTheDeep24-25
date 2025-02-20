@@ -115,8 +115,8 @@ public class Grabber implements IGrabber {
         public int viperManualSpeedReductionHeight = 5000;
         public int viperMaxHeight = 5800;
         public String servoName = "clawServo";
-        public double clawOpenPos = 0.51;
-        public double clawClosedPos = 0.452;
+        public double clawOpenPos = 0.452;
+        public double clawClosedPos = 0.405;
     }
 
 
