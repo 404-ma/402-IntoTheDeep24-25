@@ -107,9 +107,9 @@ public class DriveControl extends LinearOpMode {
                     break;
 
                 case JOYSTICK:
-                    drvTrain.setDriveVectorFromJoystick(-gamepad1.left_stick_x * (float) speedMultiplier,
+                    drvTrain.setDriveVectorFromJoystick(gamepad1.left_stick_x * (float) speedMultiplier,
                             gamepad1.right_stick_x * (float) speedMultiplier,
-                            -gamepad1.left_stick_y * (float) speedMultiplier, setReversed);
+                            gamepad1.left_stick_y * (float) speedMultiplier, setReversed);
                     break;
             }
 
