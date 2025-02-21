@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.BeakAction;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Helper.DeferredActions;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
 import org.firstinspires.ftc.teamcode.Helper.GamePad;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
+import org.firstinspires.ftc.teamcode.Helper.Hang;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,13 +24,14 @@ import java.util.Locale;
 public class DriveControl extends LinearOpMode {
     private static final String version = "1.1";
     private boolean setReversed = false;
-
     private GamePad gpIn1;
     private GamePad gpIn2;
     private DrivetrainV2 drvTrain;
     private BeakAction beakAction;
     private BucketAction bucketAction;
     private Grabber grabber;
+    private Hang hang;
+    private DcMotor hangMotor;
 
     @Override
     public void runOpMode() {
@@ -46,6 +49,10 @@ public class DriveControl extends LinearOpMode {
         beakAction = new BeakAction(hardwareMap);
         bucketAction = new BucketAction(hardwareMap);
         grabber = new Grabber(hardwareMap);
+        hang = new Hang(hardwareMap, bucketAction, beakAction);
+        hangMotor = hardwareMap.dcMotor.get("hangMotor");
+        hangMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        hangMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
         if (isStopRequested()) {
@@ -54,6 +61,7 @@ public class DriveControl extends LinearOpMode {
 
         beakAction.DrivePosition();
         bucketAction.StartPosition();
+        hang.Init();
         telemetry.clear();
 
         double speedMultiplier = 0.3;
@@ -127,6 +135,9 @@ public class DriveControl extends LinearOpMode {
                 case BUTTON_Y:
                     grabber.GoToPickupHeight();
                     break;
+                case BUTTON_B:
+                    hang.StartHangingRobot();
+                    break;
                 case DPAD_UP:
                     grabber.GoToHighBar();
                     break;
@@ -135,13 +146,21 @@ public class DriveControl extends LinearOpMode {
                     break;
                 case JOYSTICK:
                     grabber.ManualControl(gamepad2.right_stick_y);
+                    if (gamepad2.left_stick_y < -0.2)
+                        hangMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+                    if (gamepad2.left_stick_y > 0.2)
+                        hangMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+                    hangMotor.setPower(Math.abs(gamepad2.left_stick_y));
+                    if (Math.abs(gamepad2.left_stick_y) > 0.2) {
+                        hang.BringBackArm();
+                    }
                     break;
                 case RIGHT_STICK_BUTTON_ON:
                     grabber.ResetEncoder();
                     break;
             }
-
             grabber.CheckForBrake();
+            hang.ContinueHang();
             ProcessDeferredActions();
         }
     }

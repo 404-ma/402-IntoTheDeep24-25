@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.Helper;
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.example.auton.IBucket;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
-public class BucketAction {
+public class BucketAction implements IBucket {
     public static class Params {
         public double bucketStartPos = 0.58;   // Tucked in For Driving
         public double bucketCatchPos = 0.58;  // Catch from Beak
@@ -25,7 +26,7 @@ public class BucketAction {
         bucketServo.setDirection(Servo.Direction.FORWARD);
     }
 
-    private void MoveBucket(double position) {
+    public void MoveBucket(double position) {
         bucketServo.setPosition(position);
         targetBucketPosition = position;
     }

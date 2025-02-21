@@ -21,4 +21,6 @@ public interface IBeak {
 
     void changingArmDown();
 
+    void SuplexSample();
+
 }

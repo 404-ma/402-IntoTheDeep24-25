@@ -79,14 +79,30 @@ import com.acmerobotics.roadrunner.Vector2d;
 
 // The Auton used when playing red, and you want to move the three yellow samples into the basket zone
 public class AutonHuman implements Auton {
-    public void Run(Runner runner, IGrabber grabber, IBeak beak) {
+    public void Run(Runner runner, IGrabber grabber, IBeak beak, IBucket bucket) {
         grabber.GoToHighBar();
         runner.move(b -> b.strafeTo(new Vector2d(8, -43)));
         while (grabber.CheckForBrake()) ;
         runner.move(b -> b.lineToY(-34));
         grabber.HangSample();
         while (grabber.CheckForBrake());
-        runner.move(b -> b.strafeTo(new Vector2d(38, -34)));
+        grabber.SetHeight(0);
+        runner.move(b -> b.strafeTo(new Vector2d(34, -34)));
+        runner.move(b -> b.strafeTo(new Vector2d(45, -12)));
+        runner.move(b -> b.strafeTo(new Vector2d(45, -56)));
+        runner.move(b -> b.strafeTo(new Vector2d(45, -12)));
+        runner.move(b -> b.strafeTo(new Vector2d(55, -12)));
+        runner.move(b -> b.strafeTo(new Vector2d(55, -56)));
+        runner.move(b -> b.strafeTo(new Vector2d(55, -12)));
+        runner.move(b -> b.strafeTo(new Vector2d(63, -12)));
+        runner.move(b -> b.strafeTo(new Vector2d(63, -56)));
+        runner.move(b -> b.strafeTo(new Vector2d(33, -38)));
+        runner.move(b -> b.turnTo(Math.toRadians(90)));
+        runner.move(b -> b.strafeTo(new Vector2d(24, -64)));
+        grabber.GoToPickupHeight();
+        while (grabber.CheckForBrake());
+        runner.move(b -> b.strafeTo(new Vector2d(0,-34)));
+        grabber.HangSample();
     }
 
     public Pose2d getStartingPose() {
