@@ -17,13 +17,10 @@ package org.firstinspires.ftc.teamcode.Helper;
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import static android.os.SystemClock.sleep;
-
-import androidx.annotation.NonNull;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.Gamepad;
-
+import static android.os.SystemClock.sleep;
+import androidx.annotation.NonNull;
 import java.util.Date;
 
 
@@ -53,7 +50,7 @@ public class GamePad{
         public int waitLoopSleepInterval = 20;
         public int buttonLockoutInterval = 1000;
         public int dpadLockoutInterval = 1000;
-        public int triggerLockoutInterval = 20;
+        public int triggerLockoutInterval = 50;
         public int joystickButtonLockoutInterval = 300;
         public int joystickLockoutInterval = 20;  // should be Small
     }
@@ -333,17 +330,20 @@ public class GamePad{
 
         boolean lockedOut = ((LastTriggerInputTime + PARAMS.triggerLockoutInterval) - System.currentTimeMillis()) > 0;
 
+
         // Trigger Moved or Remaining in Same (Non Resting) Position Past Lockout Interval
         if (!lockedOut) {
             boolean newLeft = (inputGPad.left_trigger != LeftTriggerLast);
-            if (newLeft) {
+            boolean atRestL = (inputGPad.left_trigger == 0);
+            if (newLeft || !atRestL) {
                 LastTriggerInputTime = System.currentTimeMillis();
                 LeftTriggerLast = inputGPad.left_trigger;
                 return (GameplayInputType.LEFT_TRIGGER);
             }
 
             boolean newRight = (inputGPad.right_trigger != RightTriggerLast);
-            if (newRight) {
+            boolean atRestR = (inputGPad.right_trigger == 0);
+            if (newRight || !atRestR) {
                 LastTriggerInputTime = System.currentTimeMillis();
                 RightTriggerLast = inputGPad.right_trigger;
                 return (GameplayInputType.RIGHT_TRIGGER);
