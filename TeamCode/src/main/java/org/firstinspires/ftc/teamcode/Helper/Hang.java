@@ -9,7 +9,7 @@ public class Hang {
     DeferTimer timer;
     BucketAction bucketAction;
     BeakAction beakAction;
-    double speed = (0.67 - 0.55) / 3.0;
+    double speed = 0.67 - 0.55;
     long lastTime;
 
     // Grapple Retract Positions  0.352
@@ -36,6 +36,7 @@ public class Hang {
         if (grappleServo.getPosition() < 0.67 && !timer.IsFinished()) {
             long newTime = System.currentTimeMillis();
             grappleServo.setPosition(grappleServo.getPosition() + (speed * (double) (newTime - lastTime) / 1000.0));
+            lastTime = newTime;
         } else if (timer.IsFinished()) {
             //beakAction.MoveArm(0.3);
             //beakAction.MoveElbow(0.75);
