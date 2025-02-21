@@ -105,7 +105,7 @@ public class BeakAction implements IBeak {
         boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
 
         if (rightPosition) {
-            double armPos = Range.clip((targetArmPosition + (power * 0.004)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
+            double armPos = Range.clip((targetArmPosition + (power * 0.008)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
             MoveArm(armPos);
         }
     }

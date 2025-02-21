@@ -84,10 +84,10 @@ public class DriveControl extends LinearOpMode {
                     beakAction.PickupReachMaximum();
                     break;
                 case RIGHT_TRIGGER:
-                    beakAction.MoveArmJoystick(gamepad2.right_trigger);
+                    beakAction.MoveArmJoystick(gamepad1.right_trigger);
                     break;
                 case LEFT_TRIGGER:
-                    beakAction.MoveArmJoystick(-gamepad2.left_trigger);
+                    beakAction.MoveArmJoystick(-gamepad1.left_trigger);
                     break;
                 case BUTTON_R_BUMPER:
                     beakAction.ToggleBeak();
