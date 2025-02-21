@@ -6,7 +6,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.example.auton.IBeak;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
 
 
 @Config
@@ -35,7 +34,7 @@ public class BeakAction implements IBeak {
         targetArmPosition = position;
     }
 
-    private void MoveElbow(double position) {
+    public void MoveElbow(double position) {
         elbow.setPosition(position);
         targetElbowPosition = position;
     }
@@ -70,13 +69,13 @@ public class BeakAction implements IBeak {
     }
 
     public void SuplexSample() {
-        if (targetBeakPosition != PARAMS.beakClosedPos)  {
+        if (targetBeakPosition != PARAMS.beakClosedPos) {
             MoveBeak(PARAMS.beakClosedPos);
             DeferredActions.CreateDeferredAction((long) PARAMS.delayBeakClosed, DeferredActions.DeferredActionType.SUPLEX_BEAK);
         } else {
             MoveElbow(PARAMS.elbowSuplexPos);
             MoveArm(PARAMS.armSuplexPos);
-            DeferredActions.CreateDeferredAction( (long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
+            DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
             DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexToDrivePos, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
         }
     }
