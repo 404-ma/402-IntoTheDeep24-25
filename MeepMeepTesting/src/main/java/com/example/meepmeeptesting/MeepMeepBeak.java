@@ -56,4 +56,8 @@ public class MeepMeepBeak implements IBeak {
         System.out.println("beak start");
     }
 
+    public void SuplexSample() {
+        System.out.println("Suplex Sample");
+    }
+
 }

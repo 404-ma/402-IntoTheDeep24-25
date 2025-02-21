@@ -27,7 +27,7 @@ public class AutonHumanOp extends LinearOpMode {
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
         waitForStart();
-        auton.Run(runner, grabber, beakAction);
+        auton.Run(runner, grabber, beakAction, bucketAction);
     }
 
     private void updateTelemetry(MecanumDrive drive) {
