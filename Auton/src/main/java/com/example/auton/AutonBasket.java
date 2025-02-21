@@ -52,6 +52,9 @@ public class AutonBasket implements Auton {
         while (grabber.CheckForBrake());
         bucket.DumpSample();
         new DeferTimer(0.5).Wait();
+        runner.move(b -> b.strafeTo(new Vector2d(-58, -45)));
+        grabber.SetHeight(0);
+        runner.move(b -> b.turnTo(Math.toRadians(270)));
 //        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
 //        runner.move(b -> b.turnTo(Math.toRadians(45)));
 //        runner.move(b -> b.lineToX(-54));

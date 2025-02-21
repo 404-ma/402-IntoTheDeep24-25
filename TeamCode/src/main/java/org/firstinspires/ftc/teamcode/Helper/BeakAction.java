@@ -135,16 +135,16 @@ public class BeakAction implements IBeak {
         public double elbowDrivePos = 0.585;
 
         // Pickup Reach Position - Minimum Reach
-        public double armPickReachPos = 0.61;
-        public double elbowPickReachPos = 0.5;
+        public double armPickReachPos = 0.560;
+        public double elbowPickReachPos = 0.650;
 
         // Pickup Reach Position - Middle Reach
         public double armPickReachMiddlePos = 0.655;
-        public double elbowPickReachMiddlePos = 0.528;
+        public double elbowPickReachMiddlePos = 0.615;
 
         // Pickup Reach Position - Maximum Reach
-        public double armPickReachMaxPos = 0.755;
-        public double elbowPickReachMaxPos = 0.680;
+        public double armPickReachMaxPos = 0.710;
+        public double elbowPickReachMaxPos = 0.590;
 
         // Beak Positions
         public double beakOpenGatherPos = 0.275;
