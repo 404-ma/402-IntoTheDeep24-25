@@ -34,8 +34,24 @@ public class AutonBasket implements Auton {
         new DeferTimer(0.5).Wait();
         runner.move(b -> b.strafeTo(new Vector2d(-45, -45)));
         grabber.SetHeight(0);
-        runner.move(b -> b.strafeTo(new Vector2d(-35,-13)));
-
+        runner.move(b -> b.turnTo(Math.toRadians(270)));
+        runner.move(b -> b.strafeTo(new Vector2d(-46.25, -13)));
+        runner.move(b -> b.strafeTo(new Vector2d(-58,-13)));
+        beak.PickupReachMiddle();
+        new DeferTimer(1).Wait();
+        beak.CloseBeak();
+        new DeferTimer(0.5).Wait();
+        bucket.PrepForCatch();
+        new DeferTimer(0.5).Wait();
+        beak.SuplexSample();
+        new DeferTimer(1).Wait();
+        runner.move(b -> b.strafeTo(new Vector2d(-46.25,-13)));
+        runner.move(b -> b.turnTo(Math.toRadians(226)));
+        runner.move(b -> b.strafeTo(new Vector2d(-54,-55.5)));
+        grabber.GoToHighBar(); //THIS NEEDS TO GO TO HIGH BASKET, NOT HIGH BAR
+        while (grabber.CheckForBrake());
+        bucket.DumpSample();
+        new DeferTimer(0.5).Wait();
 //        runner.move(b -> b.waitSeconds(0.1).lineToYConstantHeading(-54));
 //        runner.move(b -> b.turnTo(Math.toRadians(45)));
 //        runner.move(b -> b.lineToX(-54));
