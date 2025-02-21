@@ -99,19 +99,14 @@ public class BeakAction implements IBeak {
         }
     }
 
-    public double conversion(double input) {
-        double elbPos = 4.55606 * Math.pow(input, 2) - 5.62539 * input + 2.24709;
-        return elbPos;
-    }
 
-    public void pickUpJoystick(float power) {
+    public void MoveArmJoystick(float power) {
+        // Compute Min Max based on Elbow Position
         boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
 
         if (rightPosition) {
             double armPos = Range.clip((targetArmPosition + (power * 0.004)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
-            double elbPos = conversion(armPos);
             MoveArm(armPos);
-            MoveElbow(elbPos);
         }
     }
 
@@ -166,7 +161,7 @@ public class BeakAction implements IBeak {
         public double delaySuplexToDrivePos = 900; //Change this
 
         //new values
-        public double armPickupMinPos = 0.61;
-        public double armPickupMaxPos = 0.755;
+        public double armPickupMinPos = armPickReachPos * 0.8;
+        public double armPickupMaxPos = armPickReachMaxPos * 1.2;
     }
 }
