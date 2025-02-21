@@ -108,7 +108,7 @@ public class Grabber implements IGrabber {
 
     public static class Params {
         public String motorName = "viperBasket";
-        public int viperPickupPos = 0;
+        public int viperPickupPos = 30;
         public int viperHighBarPos = 4900;
         public int viperLowBarPos = 1300;
         public int viperHangOffset = 1200; //1000

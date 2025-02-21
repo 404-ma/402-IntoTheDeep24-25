@@ -133,7 +133,7 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
-                    grabber.GoToPickupHeight();
+                    //grabber.GoToPickupHeight();
                     break;
                 case BUTTON_B:
                     hang.StartHangingRobot();
