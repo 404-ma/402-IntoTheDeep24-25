@@ -8,24 +8,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class BucketAction {
-    public static class Params {
-        public double bucketStartPos = 0.58;   // Tucked in For Driving
-        public double bucketCatchPos = 0.58;  // Catch from Beak
-        public double bucketDumpPos = 0.49;    // Dump to Basket
-    }
-
     public static Params PARAMS = new Params();
-
     public static double targetBucketPosition = -1;
     private final Servo bucketServo;
-
-
     public BucketAction(@NonNull HardwareMap hdwMap) {
         bucketServo = hdwMap.servo.get("bucketServo");
         bucketServo.setDirection(Servo.Direction.FORWARD);
     }
 
-    private void MoveBucket(double position) {
+    public void MoveBucket(double position) {
         bucketServo.setPosition(position);
         targetBucketPosition = position;
     }
@@ -48,5 +39,11 @@ public class BucketAction {
         } else {
             PrepForCatch();
         }
+    }
+
+    public static class Params {
+        public double bucketStartPos = 0.58;   // Tucked in For Driving
+        public double bucketCatchPos = 0.58;  // Catch from Beak
+        public double bucketDumpPos = 0.49;    // Dump to Basket
     }
 }
