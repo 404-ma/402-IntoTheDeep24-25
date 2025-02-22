@@ -101,7 +101,7 @@ public class BeakAction implements IBeak {
 
 
     public void MoveArmJoystick(float power) {
-        // Compute Min Max based on Elbow Position
+        // Compute Min Max based on Elbow Position efhehfe
         boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
 
         if (rightPosition) {
