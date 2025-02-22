@@ -25,7 +25,9 @@ public class Hang {
     }
 
     public void StartHangingRobot() {
-        bucketAction.MoveBucket(0.25);
+        bucketAction.MoveBucket(0.42);
+        beakAction.MoveArm(.48);
+        beakAction.MoveElbow(.5);
         timer = new DeferTimer(1.5);
         lastTime = System.currentTimeMillis();
     }
@@ -33,7 +35,7 @@ public class Hang {
     public void ContinueHang() {
         if (timer == null)
             return;
-        if (grappleServo.getPosition() < 0.67 && !timer.IsFinished()) {
+        if (grappleServo.getPosition() < 0.55 && !timer.IsFinished()) {
             long newTime = System.currentTimeMillis();
             grappleServo.setPosition(grappleServo.getPosition() + (speed * (double) (newTime - lastTime) / 1000.0));
             lastTime = newTime;

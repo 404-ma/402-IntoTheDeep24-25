@@ -36,12 +36,12 @@ public class BeakAction implements IBeak {
         targetArmPosition = position;
     }
 
-    private void MoveElbow(double position) {
+    public void MoveElbow(double position) {
         elbow.setPosition(position);
         targetElbowPosition = position;
     }
 
-    private void MoveBeak(double position) {
+    public void MoveBeak(double position) {
         beak.setPosition(position);
         targetBeakPosition = position;
     }
@@ -101,7 +101,7 @@ public class BeakAction implements IBeak {
 
 
     public void MoveArmJoystick(float power) {
-        // Compute Min Max based on Elbow Position efhehfe
+        // Compute Min Max based on Elbow Position
         boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
 
         if (rightPosition) {

@@ -43,6 +43,14 @@ import java.util.Date;
  *  This class collects telemetry data about its most recent values and exposes
  *  that data via (getTelemetry_...) methods.
  */
+
+/*
+BucketHangPos = .42
+ArmHangPos = .48
+ElbowHangPos = .5
+GrappleHangPos = .55
+
+ */
 @Config
 public class GamePad{
 
