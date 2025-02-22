@@ -18,15 +18,20 @@ public class AutonHumanOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Grabber grabber = new Grabber(hardwareMap);
         grabber.Close();
+
         BeakAction beakAction = new BeakAction(hardwareMap);
         beakAction.DrivePosition();
         new DeferTimer(1).Wait();
+
         BucketAction bucketAction = new BucketAction(hardwareMap);
         bucketAction.StartPosition();
         AutonHuman auton = new AutonHuman();
+
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
+
         waitForStart();
+
         auton.Run(runner, grabber, beakAction, bucketAction);
     }
 
