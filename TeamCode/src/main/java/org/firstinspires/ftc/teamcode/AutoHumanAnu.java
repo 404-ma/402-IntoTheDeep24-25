@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Helper.BucketAction;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
-@Autonomous(name = "Auton HUMAN (OBSERVATION ZONE)")
+@Autonomous(name = "Auton HUMAN ANU (OBSERVATION ZONE)")
 public class AutoHumanAnu extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
