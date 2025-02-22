@@ -34,7 +34,7 @@ public class AutoHumanAnu extends LinearOpMode {
 
         auton.Run(runner, grabber, beakAction, bucketAction);
 
-        // Additional movements and actions
+
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-30, -40)));
         beakAction.PickupReachMiddle();
         new DeferTimer(1).Wait();
