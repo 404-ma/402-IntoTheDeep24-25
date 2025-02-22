@@ -152,7 +152,7 @@ public class BeakAction implements IBeak {
 
         //Suplex Positions
         public double armSuplexPos = 0.515; // Change this
-        public double elbowSuplexPos = 0.56; //Change this
+        public double elbowSuplexPos = 0.552; //Change this
 
 
         //Suplex Timing Delays
