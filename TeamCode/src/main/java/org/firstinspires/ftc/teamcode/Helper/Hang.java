@@ -31,7 +31,7 @@ public class Hang {
         timer = new DeferTimer(1.5);
         lastTime = System.currentTimeMillis();
     }
-
+// Push Update
     public void ContinueHang() {
         if (timer == null)
             return;
