@@ -11,6 +11,7 @@ public class Hang {
     BeakAction beakAction;
     double speed = 0.67 - 0.55;
     long lastTime;
+    double holdPosition = -1;
 
     // Grapple Retract Positions  0.352
     public Hang(HardwareMap hwMap, BucketAction bucket, BeakAction beak) {
@@ -38,8 +39,7 @@ public class Hang {
             grappleServo.setPosition(grappleServo.getPosition() + (speed * (double) (newTime - lastTime) / 1000.0));
             lastTime = newTime;
         } else if (timer.IsFinished()) {
-            //beakAction.MoveArm(0.3);
-            //beakAction.MoveElbow(0.75);
+            HoldPosition();
         }
     }
 
@@ -47,4 +47,11 @@ public class Hang {
         grappleServo.setDirection(Servo.Direction.REVERSE);
         grappleServo.setPosition(0.555);
     }
+
+    public void HoldPosition() {
+        holdPosition = grappleServo.getPosition();
+        grappleServo.setPosition(holdPosition);
+    }
 }
+
+
