@@ -19,8 +19,8 @@ public class AutonBasketOp extends LinearOpMode {
         Grabber grabber = new Grabber(hardwareMap);
         grabber.Close();
         BeakAction beakAction = new BeakAction(hardwareMap);
-        beakAction.DrivePosition();
         BucketAction bucketAction = new BucketAction(hardwareMap);
+        bucketAction.StartPosition();
         new DeferTimer(1).Wait();
         AutonBasket auton = new AutonBasket();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());

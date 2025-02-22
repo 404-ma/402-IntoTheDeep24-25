@@ -71,13 +71,13 @@ public class BeakAction implements IBeak {
     }
 
     public void SuplexSample() {
-        if (targetBeakPosition != PARAMS.beakClosedPos)  {
+        if (targetBeakPosition != PARAMS.beakClosedPos) {
             MoveBeak(PARAMS.beakClosedPos);
             DeferredActions.CreateDeferredAction((long) PARAMS.delayBeakClosed, DeferredActions.DeferredActionType.SUPLEX_BEAK);
         } else {
             MoveElbow(PARAMS.elbowSuplexPos);
             MoveArm(PARAMS.armSuplexPos);
-            DeferredActions.CreateDeferredAction( (long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
+            DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
             DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexToDrivePos, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
         }
     }
@@ -139,7 +139,7 @@ public class BeakAction implements IBeak {
         public double elbowPickReachPos = 0.650;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.655;
+        public double armPickReachMiddlePos = 0.66;
         public double elbowPickReachMiddlePos = 0.615;
 
         // Pickup Reach Position - Maximum Reach
