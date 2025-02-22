@@ -3,7 +3,7 @@ package com.example.auton;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 
-// The Auton used when playing red, and you want to move the three yellow samples into the basket zone
+
 public class AutonBasketAnu implements Auton {
     public void Run(Runner runner, IGrabber grabber, IBeak beak, IBucket bucket) {
         // Initialize robot starting position
