@@ -21,10 +21,13 @@ public class AutonBasketOp extends LinearOpMode {
         BeakAction beakAction = new BeakAction(hardwareMap);
         BucketAction bucketAction = new BucketAction(hardwareMap);
         bucketAction.StartPosition();
+
         new DeferTimer(1).Wait();
+
         AutonBasket auton = new AutonBasket();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
+
         waitForStart();
         auton.Run(runner, grabber, beakAction, bucketAction);
     }
