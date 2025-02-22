@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class BucketAction implements IBucket {
     public static class Params {
-        public double bucketStartPos = 0.58;   // Tucked in For Driving
-        public double bucketCatchPos = 0.58;  // Catch from Beak
+        public double bucketStartPos = 0.59;   // Tucked in For Driving
+        public double bucketCatchPos = 0.59;  // Catch from Beak
         public double bucketDumpPos = 0.49;    // Dump to Basket
     }
 
