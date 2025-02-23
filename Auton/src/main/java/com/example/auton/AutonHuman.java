@@ -17,17 +17,17 @@ public class AutonHuman implements Auton {
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(36, -43)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(36, -15)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -15)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -55)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -53)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -15)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -15)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -55)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -53)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -15)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(63, -15)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(63, -55)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(63, -53)));
     }
 
     public Pose2d getStartingPose() {
-        return new Pose2d(12, -64, Math.toRadians(270));
+        return new Pose2d(8.5, -64, Math.toRadians(270));
     }
 }
 

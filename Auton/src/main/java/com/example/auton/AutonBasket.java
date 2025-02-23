@@ -9,16 +9,16 @@ public class AutonBasket implements Auton {
         grabber.GoToHighBar();
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5, -43)));
         beak.DrivePosition();
-        while (grabber.CheckForBrake());
+        while (grabber.CheckForBrake()) ;
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5, -32.5)));
         grabber.HangSample();
-        while (grabber.CheckForBrake());
+        while (grabber.CheckForBrake()) ;
         grabber.Open();
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5,-45)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5, -45)));
         //grabber.ToggleClaw();
         grabber.SetHeight(0);
         //grabber.Close();
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-53.8,  -41.65)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-53.8, -41.25)));
         runner.move(b -> b.turn(Math.toRadians(-202)));
         //runner.move(b -> b.strafeToConstantHeading(new Vector2d(-55, -35)));
         //runner.move(b -> b.strafeToConstantHeading(new Vector2d(-44.5, -35.5)));
@@ -33,15 +33,15 @@ public class AutonBasket implements Auton {
         beak.OpenBeak();
         new DeferTimer(0.2).Wait();
         beak.DrivePosition();
-        runner.move(b -> b.strafeTo(new Vector2d(-63, -55.1))); //Basket
+        runner.move(b -> b.strafeTo(new Vector2d(-63.2, -54.9))); //Basket
         runner.move(b -> b.turn(Math.toRadians(-47.5)));
         grabber.SetHeight(7300);
-        while (grabber.CheckForBrake());
+        while (grabber.CheckForBrake()) ;
         bucket.DumpSample();
         new DeferTimer(2).Wait();
         grabber.SetHeight(0);
-        while (grabber.CheckForBrake());
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-60,  -41.65))); // Block 2 position?
+        while (grabber.CheckForBrake()) ;
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-60, -41.25))); // Block 2 position?
         bucket.PrepForCatch();
         //New Code Past Here
         runner.move(b -> b.turn(Math.toRadians(48)));
@@ -56,15 +56,15 @@ public class AutonBasket implements Auton {
         beak.OpenBeak();
         new DeferTimer(0.2).Wait();
         beak.DrivePosition();
-        runner.move(b -> b.strafeTo(new Vector2d(-63.4, -55.1))); // Basket
+        runner.move(b -> b.strafeTo(new Vector2d(-63.2, -54.9))); //Basket
         runner.move(b -> b.turn(Math.toRadians(-48)));
         grabber.SetHeight(7300);
-        while (grabber.CheckForBrake());
+        while (grabber.CheckForBrake()) ;
         bucket.DumpSample();
         new DeferTimer(2).Wait();
         grabber.SetHeight(0);
-        while (grabber.CheckForBrake());
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(43,  -55))); // Block 3 position
+        while (grabber.CheckForBrake()) ;
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(43, -55))); // Block 3 position
     }
 
     public Pose2d getStartingPose() {
