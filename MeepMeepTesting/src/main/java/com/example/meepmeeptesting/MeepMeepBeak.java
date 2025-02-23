@@ -36,6 +36,10 @@ public class MeepMeepBeak implements IBeak {
         System.out.println("Toggle beak");
     }
 
+    public void PickupMiddleAuton() {
+        System.out.println("Pickup Middle Auton");
+    };
+
     public void changingArmUp() {
         System.out.println("changing arm up");
     }

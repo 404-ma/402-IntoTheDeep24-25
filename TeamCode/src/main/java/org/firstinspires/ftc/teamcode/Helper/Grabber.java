@@ -101,7 +101,7 @@ public class Grabber implements IGrabber {
     public void HangSample() {
         int pos = motor.getCurrentPosition();
         if (pos > PARAMS.viperHangOffset) {
-            SetHeight(pos - PARAMS.viperHangOffset);
+            SetHeight(pos - PARAMS.viperHangOffset + 100);
             queueOpen = true;
         }
     }

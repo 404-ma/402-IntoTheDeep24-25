@@ -13,11 +13,6 @@ public class Hang {
     BeakAction beakAction;
     double speed = 0.67 - 0.55;
     long lastTime;
-<<<<<<< Updated upstream
-    double holdPosition = -1;
-=======
-    boolean hasHung = false;
->>>>>>> Stashed changes
 
     // Grapple Retract Positions  0.352
     public Hang(HardwareMap hwMap, BucketAction bucket, BeakAction beak) {
@@ -29,7 +24,7 @@ public class Hang {
     }
 
     public void Init() {
-        grappleServo.setPosition(0.48);
+        grappleServo.setPosition(0.45);
     }
 
     public void StartHangingRobot() {
@@ -44,12 +39,12 @@ public class Hang {
     public void ContinueHang() {
         if (timer == null)
             return;
-        if (grappleServo.getPosition() < 0.59 && !timer.IsFinished()) {
+        if (grappleServo.getPosition() < 0.55 && !timer.IsFinished()) {
             long newTime = System.currentTimeMillis();
             grappleServo.setPosition(grappleServo.getPosition() + (speed * (double) (newTime - lastTime) / 1000.0));
             lastTime = newTime;
         } else if (timer.IsFinished()) {
-            HoldPosition();
+            //probably nothing
         }
     }
 
@@ -62,12 +57,7 @@ public class Hang {
 
     public void BringBackArm() {
         grappleServo.setDirection(Servo.Direction.REVERSE);
-        grappleServo.setPosition(0.5);
-    }
-
-    public void HoldPosition() {
-        holdPosition = grappleServo.getPosition();
-        grappleServo.setPosition(holdPosition);
+        grappleServo.setPosition(0.455);
     }
 }
 

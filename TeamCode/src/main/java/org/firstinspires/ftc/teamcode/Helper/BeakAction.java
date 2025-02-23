@@ -64,6 +64,12 @@ public class BeakAction implements IBeak {
         MoveArm(PARAMS.armPickReachMiddlePos);
     }
 
+    public void PickupMiddleAuton() {
+        MoveBeak(PARAMS.beakOpenGatherPos);
+        MoveElbow(PARAMS.elbowPickReachMiddlePos + 0.015);
+        MoveArm(PARAMS.armPickReachMiddlePos + 0.015);
+    }
+
     public void PickupReachMaximum() {
         MoveBeak(PARAMS.beakOpenGatherPos);
         MoveElbow(PARAMS.elbowPickReachMaxPos);

@@ -11,6 +11,8 @@ public interface IBeak {
 
     void PickupReachMaximum();
 
+    void PickupMiddleAuton();
+
     void CloseBeak();
 
     void OpenBeak();

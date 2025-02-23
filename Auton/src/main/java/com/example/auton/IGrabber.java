@@ -5,6 +5,8 @@ public interface IGrabber {
 
     void Close();
 
+    void ToggleClaw();
+
     void SetHeight(int position);
 
     void GoToHighBar();

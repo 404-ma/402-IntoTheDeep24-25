@@ -36,6 +36,7 @@ public class AutonBasketOp extends LinearOpMode {
         Vector2d pos = drive.pose.position;
         telemetry.addLine().addData("Current X Pos:", pos.x);
         telemetry.addLine().addData("Current Y Pos:", pos.y);
+        telemetry.addLine().addData("Current Heading:", drive.pose.heading);
         telemetry.update();
     }
 }

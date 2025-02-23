@@ -16,6 +16,10 @@ public class MeepMeepGrabber implements IGrabber {
         System.out.println(position);
     }
 
+    public void ToggleClaw() {
+        System.out.println("Toggle Claw");
+    }
+
     public void GoToHighBar() {
         System.out.println("Go to high bar");
     }
