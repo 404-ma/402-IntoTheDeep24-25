@@ -46,9 +46,9 @@ import java.util.Date;
 
 /*
 BucketHangPos = .42
-ArmHangPos = .48
-ElbowHangPos = .5
-GrappleHangPos = .55
+ArmHangPos = .50
+ElbowHangPos = .52
+GrappleHangPos = .455
 Push Update
  */
 @Config

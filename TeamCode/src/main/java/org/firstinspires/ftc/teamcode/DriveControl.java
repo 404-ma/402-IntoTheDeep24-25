@@ -133,10 +133,13 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
-                    //grabber.GoToPickupHeight();
+                    hang.HoldPosition();
                     break;
                 case BUTTON_B:
                     hang.StartHangingRobot();
+                    break;
+                case BUTTON_X:
+                    hang.BringBackArm();
                     break;
                 case DPAD_UP:
                     grabber.GoToHighBar();
@@ -152,7 +155,7 @@ public class DriveControl extends LinearOpMode {
                         hangMotor.setDirection(DcMotorSimple.Direction.REVERSE);
                     hangMotor.setPower(Math.abs(gamepad2.left_stick_y));
                     if (Math.abs(gamepad2.left_stick_y) > 0.2) {
-                        hang.BringBackArm();
+                        //hang.BringBackArm();
                     }
                     break;
                 case RIGHT_STICK_BUTTON_ON:

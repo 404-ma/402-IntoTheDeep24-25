@@ -9,10 +9,10 @@ public class AutonBasket implements Auton {
         grabber.GoToHighBar();
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5, -43)));
         beak.DrivePosition();
-        while (grabber.CheckForBrake()) ;
+        while (grabber.CheckForBrake());
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(-12.5, -33)));
         grabber.HangSample();
-        while (grabber.CheckForBrake()) ;
+        while (grabber.CheckForBrake());
         runner.move(b -> b.lineToYConstantHeading(-43));
         grabber.SetHeight(0);
         grabber.Close();

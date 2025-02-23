@@ -35,7 +35,7 @@ public class AutoHumanAnu extends LinearOpMode {
         auton.Run(runner, grabber, beakAction, bucketAction);
 
 
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-30, -40)));
+        /*runner.move(b -> b.strafeToConstantHeading(new Vector2d(-30, -40)));
         beakAction.PickupReachMiddle();
         new DeferTimer(1).Wait();
         beakAction.CloseBeak();
@@ -49,13 +49,14 @@ public class AutoHumanAnu extends LinearOpMode {
         beakAction.OpenBeak();
         new DeferTimer(0.5).Wait();
 
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-10, 0))); // Parking position
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-10, 0))); // Parking position*/
     }
 
     private void updateTelemetry(MecanumDrive drive) {
         Vector2d pos = drive.pose.position;
         telemetry.addLine().addData("Current X Pos:", pos.x);
         telemetry.addLine().addData("Current Y Pos:", pos.y);
+        telemetry.addLine().addData("Current Heading:", drive.pose.heading);
         telemetry.update();
     }
 }

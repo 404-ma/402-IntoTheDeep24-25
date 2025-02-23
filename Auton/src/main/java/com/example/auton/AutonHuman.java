@@ -88,6 +88,7 @@ public class AutonHuman implements Auton {
         while (grabber.CheckForBrake());
         grabber.SetHeight(0);
         runner.move(b -> b.strafeTo(new Vector2d(34, -34)));
+        runner.move(b -> b.turn(Math.toRadians(120)));
         runner.move(b -> b.strafeTo(new Vector2d(45, -12)));
         runner.move(b -> b.strafeTo(new Vector2d(45, -56)));
         runner.move(b -> b.strafeTo(new Vector2d(45, -12)));
@@ -97,7 +98,7 @@ public class AutonHuman implements Auton {
         runner.move(b -> b.strafeTo(new Vector2d(63, -12)));
         runner.move(b -> b.strafeTo(new Vector2d(63, -56)));
         runner.move(b -> b.strafeTo(new Vector2d(33, -38)));
-        runner.move(b -> b.turnTo(Math.toRadians(90)));
+        runner.move(b -> b.turnTo(Math.toRadians(120)));
         runner.move(b -> b.strafeTo(new Vector2d(24, -64)));
         grabber.GoToPickupHeight();
         while (grabber.CheckForBrake());
