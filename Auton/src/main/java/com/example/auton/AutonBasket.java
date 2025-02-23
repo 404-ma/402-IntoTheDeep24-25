@@ -18,7 +18,7 @@ public class AutonBasket implements Auton {
         //grabber.ToggleClaw();
         grabber.SetHeight(0);
         //grabber.Close();
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-54,  -41.65)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-53.8,  -41.65)));
         runner.move(b -> b.turn(Math.toRadians(-202)));
         //runner.move(b -> b.strafeToConstantHeading(new Vector2d(-55, -35)));
         //runner.move(b -> b.strafeToConstantHeading(new Vector2d(-44.5, -35.5)));
@@ -33,7 +33,30 @@ public class AutonBasket implements Auton {
         beak.OpenBeak();
         new DeferTimer(0.2).Wait();
         beak.DrivePosition();
-        runner.move(b -> b.strafeTo(new Vector2d(-63.4, -55.1)));
+        runner.move(b -> b.strafeTo(new Vector2d(-63, -55.1))); //Basket
+        runner.move(b -> b.turn(Math.toRadians(-47.5)));
+        grabber.SetHeight(7300);
+        while (grabber.CheckForBrake());
+        bucket.DumpSample();
+        new DeferTimer(2).Wait();
+        grabber.SetHeight(0);
+        while (grabber.CheckForBrake());
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-60,  -41.65))); // Block 2 position?
+        bucket.PrepForCatch();
+        //New Code Past Here
+        runner.move(b -> b.turn(Math.toRadians(48)));
+        beak.PickupMiddleAuton();
+        new DeferTimer(1).Wait();
+        beak.CloseBeak();
+        new DeferTimer(0.5).Wait();
+        bucket.PrepForCatch();
+        new DeferTimer(0.5).Wait();
+        beak.SuplexSample();
+        new DeferTimer(1).Wait();
+        beak.OpenBeak();
+        new DeferTimer(0.2).Wait();
+        beak.DrivePosition();
+        runner.move(b -> b.strafeTo(new Vector2d(-63.4, -55.1))); // Basket
         runner.move(b -> b.turn(Math.toRadians(-48)));
         grabber.SetHeight(7300);
         while (grabber.CheckForBrake());
@@ -41,8 +64,7 @@ public class AutonBasket implements Auton {
         new DeferTimer(2).Wait();
         grabber.SetHeight(0);
         while (grabber.CheckForBrake());
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-67,  -41.65)));
-        bucket.PrepForCatch();
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(43,  -55))); // Block 3 position
     }
 
     public Pose2d getStartingPose() {
