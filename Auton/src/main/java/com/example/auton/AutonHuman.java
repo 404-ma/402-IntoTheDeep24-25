@@ -14,16 +14,16 @@ public class AutonHuman implements Auton {
         while (grabber.CheckForBrake()) ;
         grabber.SetHeight(0);
         runner.move(b -> b.lineToYConstantHeading(-43));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(36, -43)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(36, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -53)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(48, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -53)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(57, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(63, -7)));
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(63, -53)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(33, -43)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(33, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(45, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(45, -53)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(45, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(54, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(54, -53)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(54, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(60, -7)));
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(60, -53)));
     }
 
     public Pose2d getStartingPose() {
