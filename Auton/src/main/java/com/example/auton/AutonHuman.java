@@ -15,6 +15,7 @@ public class AutonHuman implements Auton {
         grabber.SetHeight(0);
         runner.move(b -> b.lineToYConstantHeading(-43));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(33, -43)));
+        runner.move(b -> b.turn(Math.toRadians(-198)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(33, -7)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(45, -7)));
         runner.move(b -> b.strafeToConstantHeading(new Vector2d(45, -53)));

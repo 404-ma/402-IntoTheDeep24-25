@@ -11,7 +11,7 @@ public class Hang {
     DeferTimer timer;
     BucketAction bucketAction;
     BeakAction beakAction;
-    double speed = 0.515 - 0.415;
+    double speed = 0.470 - 0.380;
     long lastTime;
 
     // Grapple Retract Positions  0.352
@@ -19,12 +19,9 @@ public class Hang {
         grappleServo = hwMap.servo.get("grappleServo");
         hangMotor = hwMap.dcMotor.get("hangMotor");
         grappleServo.setDirection(Servo.Direction.FORWARD);
+        grappleServo.setPosition(0.380);
         bucketAction = bucket;
         beakAction = beak;
-    }
-
-    public void Init() {
-        grappleServo.setPosition(0.415);
     }
 
     public void StartHangingRobot() {
@@ -39,7 +36,7 @@ public class Hang {
     public void ContinueHang() {
         if (timer == null)
             return;
-        if (grappleServo.getPosition() < 0.515 && !timer.IsFinished()) {
+        if (grappleServo.getPosition() < 0.470 && !timer.IsFinished()) {
             long newTime = System.currentTimeMillis();
             grappleServo.setPosition(grappleServo.getPosition() + (speed * (double) (newTime - lastTime) / 1000.0));
             lastTime = newTime;
@@ -57,7 +54,7 @@ public class Hang {
 
     public void BringBackArm() {
         grappleServo.setDirection(Servo.Direction.REVERSE);
-        grappleServo.setPosition(0.42);
+        grappleServo.setPosition(0.380);
     }
 }
 

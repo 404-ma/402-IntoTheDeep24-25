@@ -49,7 +49,6 @@ public class DriveControl extends LinearOpMode {
         beakAction = new BeakAction(hardwareMap);
         bucketAction = new BucketAction(hardwareMap);
         grabber = new Grabber(hardwareMap);
-        hang = new Hang(hardwareMap, bucketAction, beakAction);
         hangMotor = hardwareMap.dcMotor.get("hangMotor");
         hangMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         hangMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -61,7 +60,6 @@ public class DriveControl extends LinearOpMode {
 
         beakAction.DrivePosition();
         bucketAction.StartPosition();
-        hang.Init();
         telemetry.clear();
 
         double speedMultiplier = 0.3;
@@ -133,12 +131,18 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
                     hang.HoldPosition();
                     break;
                 case BUTTON_B:
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
                     hang.StartHangingRobot();
                     break;
                 case BUTTON_X:
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
                     hang.BringBackArm();
                     break;
                 case DPAD_UP:
@@ -163,7 +167,8 @@ public class DriveControl extends LinearOpMode {
                     break;
             }
             grabber.CheckForBrake();
-            hang.ContinueHang();
+            if(hang != null)
+                hang.ContinueHang();
             ProcessDeferredActions();
         }
     }
