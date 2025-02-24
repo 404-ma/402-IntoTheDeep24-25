@@ -40,8 +40,8 @@ public class AutonBasket implements Auton {
         bucket.DumpSample();
         new DeferTimer(2).Wait();
         grabber.SetHeight(0);
-        while (grabber.CheckForBrake()) ;
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-60, -41.25))); // Block 2 position?
+        while (grabber.CheckForBrake());
+        /*runner.move(b -> b.strafeToConstantHeading(new Vector2d(-60, -41.25))); // Block 2 position?
         bucket.PrepForCatch();
         //New Code Past Here
         runner.move(b -> b.turn(Math.toRadians(47)));
@@ -64,7 +64,7 @@ public class AutonBasket implements Auton {
         new DeferTimer(2).Wait();
         grabber.SetHeight(0);
         while (grabber.CheckForBrake()) ;
-        runner.move(b -> b.strafeToConstantHeading(new Vector2d(43, -55))); // Block 3 position
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(43, -55))); // Block 3 position*/
     }
 
     public Pose2d getStartingPose() {
