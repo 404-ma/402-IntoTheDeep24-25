@@ -101,19 +101,19 @@ public class Grabber implements IGrabber {
     public void HangSample() {
         int pos = motor.getCurrentPosition();
         if (pos > PARAMS.viperHangOffset) {
-            SetHeight(pos - PARAMS.viperHangOffset);
+            SetHeight(pos - PARAMS.viperHangOffset + 100);
             queueOpen = true;
         }
     }
 
     public static class Params {
         public String motorName = "viperBasket";
-        public int viperPickupPos = 0;
+        public int viperPickupPos = 30;
         public int viperHighBarPos = 4900;
         public int viperLowBarPos = 1300;
-        public int viperHangOffset = 1200; //1000
-        public int viperManualSpeedReductionHeight = 6900;
-        public int viperMaxHeight = 7500;
+        public int viperHangOffset = 1500; //1000
+        public int viperManualSpeedReductionHeight = 7200;
+        public int viperMaxHeight = 7300;
         public String servoName = "clawServo";
         public double clawOpenPos = 0.452;
         public double clawClosedPos = 0.405;

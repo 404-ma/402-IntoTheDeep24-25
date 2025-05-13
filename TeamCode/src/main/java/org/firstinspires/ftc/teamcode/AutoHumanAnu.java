@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.Helper.BucketAction;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
-@Autonomous(name = "Auton HUMAN (OBSERVATION ZONE)")
-public class AutonHumanOp extends LinearOpMode {
+@Autonomous(name = "Auton HUMAN ANU (OBSERVATION ZONE)")
+public class AutoHumanAnu extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Grabber grabber = new Grabber(hardwareMap);
@@ -33,12 +33,31 @@ public class AutonHumanOp extends LinearOpMode {
         waitForStart();
 
         auton.Run(runner, grabber, beakAction, bucketAction);
+
+
+        /*runner.move(b -> b.strafeToConstantHeading(new Vector2d(-30, -40)));
+        beakAction.PickupReachMiddle();
+        new DeferTimer(1).Wait();
+        beakAction.CloseBeak();
+        new DeferTimer(0.5).Wait();
+        bucketAction.PrepForCatch();
+        new DeferTimer(0.5).Wait();
+        beakAction.SuplexSample();
+        new DeferTimer(1).Wait();
+
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-20, -20)));
+        beakAction.OpenBeak();
+        new DeferTimer(0.5).Wait();
+
+        runner.move(b -> b.strafeToConstantHeading(new Vector2d(-10, 0))); // Parking position*/
     }
 
     private void updateTelemetry(MecanumDrive drive) {
         Vector2d pos = drive.pose.position;
         telemetry.addLine().addData("Current X Pos:", pos.x);
         telemetry.addLine().addData("Current Y Pos:", pos.y);
+        telemetry.addLine().addData("Current Heading:", drive.pose.heading);
         telemetry.update();
     }
 }
+

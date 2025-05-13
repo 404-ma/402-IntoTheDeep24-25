@@ -11,6 +11,8 @@ public interface IBeak {
 
     void PickupReachMaximum();
 
+    void PickupMiddleAuton();
+
     void CloseBeak();
 
     void OpenBeak();
@@ -20,5 +22,7 @@ public interface IBeak {
     void changingArmUp();
 
     void changingArmDown();
+
+    void SuplexSample();
 
 }

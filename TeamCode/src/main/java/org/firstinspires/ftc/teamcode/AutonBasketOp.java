@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Helper.AutonRunner;
 import org.firstinspires.ftc.teamcode.Helper.BeakAction;
+import org.firstinspires.ftc.teamcode.Helper.BucketAction;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
 import org.firstinspires.ftc.teamcode.RoadRunner.MecanumDrive;
 
@@ -18,19 +19,24 @@ public class AutonBasketOp extends LinearOpMode {
         Grabber grabber = new Grabber(hardwareMap);
         grabber.Close();
         BeakAction beakAction = new BeakAction(hardwareMap);
-        beakAction.DrivePosition();
+        BucketAction bucketAction = new BucketAction(hardwareMap);
+        bucketAction.StartPosition();
+
         new DeferTimer(1).Wait();
+
         AutonBasket auton = new AutonBasket();
         MecanumDrive mecanumDrive = new MecanumDrive(hardwareMap, auton.getStartingPose());
         AutonRunner runner = new AutonRunner(mecanumDrive, this::updateTelemetry);
+
         waitForStart();
-        auton.Run(runner, grabber, beakAction);
+        auton.Run(runner, grabber, beakAction, bucketAction);
     }
 
     private void updateTelemetry(MecanumDrive drive) {
         Vector2d pos = drive.pose.position;
         telemetry.addLine().addData("Current X Pos:", pos.x);
         telemetry.addLine().addData("Current Y Pos:", pos.y);
+        telemetry.addLine().addData("Current Heading:", drive.pose.heading);
         telemetry.update();
     }
 }

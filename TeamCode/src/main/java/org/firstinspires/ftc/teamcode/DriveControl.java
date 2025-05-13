@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Helper.BeakAction;
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Helper.DeferredActions;
 import org.firstinspires.ftc.teamcode.Helper.DrivetrainV2;
 import org.firstinspires.ftc.teamcode.Helper.GamePad;
 import org.firstinspires.ftc.teamcode.Helper.Grabber;
+import org.firstinspires.ftc.teamcode.Helper.Hang;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,13 +24,14 @@ import java.util.Locale;
 public class DriveControl extends LinearOpMode {
     private static final String version = "1.1";
     private boolean setReversed = false;
-
     private GamePad gpIn1;
     private GamePad gpIn2;
     private DrivetrainV2 drvTrain;
     private BeakAction beakAction;
     private BucketAction bucketAction;
     private Grabber grabber;
+    private Hang hang;
+    private DcMotor hangMotor;
 
     @Override
     public void runOpMode() {
@@ -46,6 +49,9 @@ public class DriveControl extends LinearOpMode {
         beakAction = new BeakAction(hardwareMap);
         bucketAction = new BucketAction(hardwareMap);
         grabber = new Grabber(hardwareMap);
+        hangMotor = hardwareMap.dcMotor.get("hangMotor");
+        hangMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        hangMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
         if (isStopRequested()) {
@@ -76,10 +82,10 @@ public class DriveControl extends LinearOpMode {
                     beakAction.PickupReachMaximum();
                     break;
                 case RIGHT_TRIGGER:
-                    beakAction.pickUpJoystick(gamepad2.right_trigger);
+                    beakAction.MoveArmJoystick(gamepad1.right_trigger);
                     break;
                 case LEFT_TRIGGER:
-                    beakAction.pickUpJoystick(-gamepad2.left_trigger);
+                    beakAction.MoveArmJoystick(-gamepad1.left_trigger);
                     break;
                 case BUTTON_R_BUMPER:
                     beakAction.ToggleBeak();
@@ -125,7 +131,19 @@ public class DriveControl extends LinearOpMode {
                     grabber.HangSample();
                     break;
                 case BUTTON_Y:
-                    grabber.GoToPickupHeight();
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
+                    hang.HoldPosition();
+                    break;
+                case BUTTON_B:
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
+                    hang.StartHangingRobot();
+                    break;
+                case BUTTON_X:
+                    if(hang == null)
+                        hang = new Hang(hardwareMap, bucketAction, beakAction);
+                    hang.BringBackArm();
                     break;
                 case DPAD_UP:
                     grabber.GoToHighBar();
@@ -135,13 +153,22 @@ public class DriveControl extends LinearOpMode {
                     break;
                 case JOYSTICK:
                     grabber.ManualControl(gamepad2.right_stick_y);
+                    if (gamepad2.left_stick_y < -0.2)
+                        hangMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+                    if (gamepad2.left_stick_y > 0.2)
+                        hangMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+                    hangMotor.setPower(Math.abs(gamepad2.left_stick_y));
+                    if (Math.abs(gamepad2.left_stick_y) > 0.2) {
+                        //hang.BringBackArm();
+                    }
                     break;
                 case RIGHT_STICK_BUTTON_ON:
                     grabber.ResetEncoder();
                     break;
             }
-
             grabber.CheckForBrake();
+            if(hang != null)
+                hang.ContinueHang();
             ProcessDeferredActions();
         }
     }

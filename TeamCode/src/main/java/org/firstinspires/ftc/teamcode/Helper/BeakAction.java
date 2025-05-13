@@ -20,6 +20,7 @@ public class BeakAction implements IBeak {
     private final Servo elbow;
 
     public BeakAction(@NonNull HardwareMap hardwareMap) {
+        //   super();
         beak = hardwareMap.servo.get("beakServo");
         beak.setDirection(Servo.Direction.FORWARD);
 
@@ -35,12 +36,12 @@ public class BeakAction implements IBeak {
         targetArmPosition = position;
     }
 
-    private void MoveElbow(double position) {
+    public void MoveElbow(double position) {
         elbow.setPosition(position);
         targetElbowPosition = position;
     }
 
-    private void MoveBeak(double position) {
+    public void MoveBeak(double position) {
         beak.setPosition(position);
         targetBeakPosition = position;
     }
@@ -63,6 +64,12 @@ public class BeakAction implements IBeak {
         MoveArm(PARAMS.armPickReachMiddlePos);
     }
 
+    public void PickupMiddleAuton() {
+        MoveBeak(PARAMS.beakOpenGatherPos);
+        MoveElbow(PARAMS.elbowPickReachMiddlePos + 0.015);
+        MoveArm(PARAMS.armPickReachMiddlePos + 0.015);
+    }
+
     public void PickupReachMaximum() {
         MoveBeak(PARAMS.beakOpenGatherPos);
         MoveElbow(PARAMS.elbowPickReachMaxPos);
@@ -70,13 +77,13 @@ public class BeakAction implements IBeak {
     }
 
     public void SuplexSample() {
-        if (targetBeakPosition != PARAMS.beakClosedPos)  {
+        if (targetBeakPosition != PARAMS.beakClosedPos) {
             MoveBeak(PARAMS.beakClosedPos);
             DeferredActions.CreateDeferredAction((long) PARAMS.delayBeakClosed, DeferredActions.DeferredActionType.SUPLEX_BEAK);
         } else {
             MoveElbow(PARAMS.elbowSuplexPos);
             MoveArm(PARAMS.armSuplexPos);
-            DeferredActions.CreateDeferredAction( (long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
+            DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexBeakOpen, DeferredActions.DeferredActionType.BEAK_OPEN);
             DeferredActions.CreateDeferredAction((long) PARAMS.delaySuplexToDrivePos, DeferredActions.DeferredActionType.BEAK_DRIVE_SAFE);
         }
     }
@@ -99,16 +106,14 @@ public class BeakAction implements IBeak {
     }
 
 
-    public void pickUpJoystick(float power) {
-        // Rework for New Beak Hardware
-//        boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
-//
-//        if (rightPosition) {
-//            double armPos = Range.clip((targetArmPosition + (power * 0.004)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
-//            double elbPos = conversion(armPos);
-//            MoveArm(armPos);
-//            MoveElbow(elbPos);
-//        }
+    public void MoveArmJoystick(float power) {
+        // Compute Min Max based on Elbow Position
+        boolean rightPosition = ((targetArmPosition >= PARAMS.armPickupMinPos) && (targetArmPosition <= PARAMS.armPickupMaxPos));
+
+        if (rightPosition) {
+            double armPos = Range.clip((targetArmPosition + (power * 0.008)), PARAMS.armPickupMinPos, PARAMS.armPickupMaxPos);
+            MoveArm(armPos);
+        }
     }
 
     public void changingArmUp() {
@@ -136,16 +141,16 @@ public class BeakAction implements IBeak {
         public double elbowDrivePos = 0.585;
 
         // Pickup Reach Position - Minimum Reach
-        public double armPickReachPos = 0.61;
-        public double elbowPickReachPos = 0.5;
+        public double armPickReachPos = 0.560;
+        public double elbowPickReachPos = 0.650;
 
         // Pickup Reach Position - Middle Reach
-        public double armPickReachMiddlePos = 0.655;
-        public double elbowPickReachMiddlePos = 0.528;
+        public double armPickReachMiddlePos = 0.66;
+        public double elbowPickReachMiddlePos = 0.615;
 
         // Pickup Reach Position - Maximum Reach
-        public double armPickReachMaxPos = 0.755;
-        public double elbowPickReachMaxPos = .595;
+        public double armPickReachMaxPos = 0.710;
+        public double elbowPickReachMaxPos = 0.590;
 
         // Beak Positions
         public double beakOpenGatherPos = 0.275;
@@ -153,7 +158,7 @@ public class BeakAction implements IBeak {
 
         //Suplex Positions
         public double armSuplexPos = 0.515; // Change this
-        public double elbowSuplexPos = 0.56; //Change this
+        public double elbowSuplexPos = 0.552; //Change this
 
 
         //Suplex Timing Delays
